@@ -3,6 +3,9 @@
               :object => @category,
               :include_object_name => true %>
 
+  <%= render '/refinery/admin/locale_picker',
+              :current_locale => Globalize.locale %>
+
   <div class='field'>
     <%= f.label :title -%>
     <%= f.text_field :title, :class => 'larger widest' -%>
