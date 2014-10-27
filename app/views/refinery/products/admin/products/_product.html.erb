@@ -1,14 +1,22 @@
 <li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(product) -%>">
   <span class='title'>
-    <%= product.title %>
-
+    <%= product.title.presence || product.translations.detect {|t| t.title.present?}.title %>
+    <span class="preview">
+      <% product.translations.each do |translation| %>
+        <% if translation.title.present? %>
+          <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
+              refinery.edit_products_admin_product_path(product, :switch_locale => translation.locale),
+              :class => 'locale' %>
+          <% end %>
+      <% end %>
+    </span>
   </span>
   <span class='actions'>
-    
+
     <%= link_to refinery_icon_tag("application_go.png"), refinery.products_product_path(product),
         :title => t('.view_live_html'),
         :target => "_blank" %>
-    
+
     <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_products_admin_product_path(product),
          :title => t('.edit') %>
     <%= link_to refinery_icon_tag("delete.png"), refinery.products_admin_product_path(product),
