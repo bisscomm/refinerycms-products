@@ -1,36 +1,29 @@
 Refinery::Core::Engine.routes.draw do
 
   # Frontend routes
-  namespace :products do
-    resources :products, :path => '', :only => [:index, :show]
+  namespace :products, :path => Refinery::Products.page_path_products_index do
+    root :to => "products#index"
+    resources :products, :only => [:show]
+
+    get 'categories/:id', :to => 'categories#show', :as => 'category'
   end
+
 
   # Admin routes
   namespace :products, :path => '' do
     namespace :admin, :path => Refinery::Core.backend_route do
-      resources :products, :except => :show do
-        collection do
-          post :update_positions
+      scope :path => Refinery::Products.page_path_products_index do
+        root :to => "products#index"
+
+        resources :products, :except => :show do
+          collection do
+            post :update_positions
+            get :uncategorized
+          end
         end
+
+        resources :categories
       end
     end
   end
-
-
-  # Frontend routes
-  namespace :products do
-    resources :categories, :only => [:index, :show]
-  end
-
-  # Admin routes
-  namespace :products, :path => '' do
-    namespace :admin, :path => "#{Refinery::Core.backend_route}/products" do
-      resources :categories, :except => :show do
-        collection do
-          post :update_positions
-        end
-      end
-    end
-  end
-
 end
