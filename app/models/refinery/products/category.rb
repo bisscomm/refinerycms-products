@@ -9,9 +9,17 @@ module Refinery
 
       validates :title, :presence => true, :uniqueness => true
 
-      # To enable admin searching, add acts_as_indexed on searchable fields, for example:
-      #
-      #   acts_as_indexed :fields => [:title]
+      acts_as_indexed :fields => [:title]
+
+      # If title changes tell friendly_id to regenerate slug when
+      # saving record
+      def should_generate_new_friendly_id?
+        title_changed?
+      end
+
+      def friendly_id_source
+        title
+      end
 
     end
   end
