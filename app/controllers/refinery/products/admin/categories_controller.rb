@@ -6,6 +6,10 @@ module Refinery
         crudify :'refinery/products/category',
                 :xhr_paging => true
 
+        private
+          def category_params
+            params.require(:category).permit(:title)
+          end
       end
     end
   end
