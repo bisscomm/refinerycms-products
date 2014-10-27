@@ -1,0 +1,50 @@
+it:
+  refinery:
+    plugins:
+      categories:
+        title: Categories
+      products:
+        title: Products
+    products:
+      admin:
+        categories:
+          actions:
+            create_new: Aggiungi Nuovo Category
+            reorder: Riordina Categories
+            reorder_done: Termina il Riordino di Categories
+          records:
+            title: Categories
+            sorry_no_results: Spiacenti! Nessun risultato trovato
+            no_items_yet: Non ci sono ancora Categories. Clicca "Aggiungi Nuovo Category"
+              per aggiungere il tuo primo category.
+          category:
+            view_live_html: Guarda live questo category <br/><em>(apre una nuova finestra)</em>
+            edit: Modifica questo category
+            delete: Rimuovi per sempre questo category
+        products:
+          actions:
+            create_new: Aggiungi Nuovo Product
+            reorder: Riordina Products
+            reorder_done: Termina il Riordino di Products
+          records:
+            title: Products
+            sorry_no_results: Spiacenti! Nessun risultato trovato
+            no_items_yet: Non ci sono ancora Products. Clicca "Aggiungi Nuovo Product"
+              per aggiungere il tuo primo product.
+          product:
+            view_live_html: Guarda live questo product <br/><em>(apre una nuova finestra)</em>
+            edit: Modifica questo product
+            delete: Rimuovi per sempre questo product
+      categories:
+        show:
+          other: Altri Categories
+      products:
+        show:
+          other: Altri Products
+  activerecord:
+    attributes:
+      refinery/products/category:
+        title: Title
+      refinery/products/product:
+        title: Title
+        body: Body

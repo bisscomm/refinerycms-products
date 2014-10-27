@@ -1,0 +1,52 @@
+nb:
+  refinery:
+    plugins:
+      categories:
+        title: Categories
+      products:
+        title: Products
+    products:
+      admin:
+        categories:
+          actions:
+            create_new: Lag en ny Category
+            reorder: Endre rekkefølgen på Categories
+            reorder_done: Ferdig å endre rekkefølgen Categories
+          records:
+            title: Categories
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Categories enda. Klikk på "Lag en ny Category"
+              for å legge til din første category.
+          category:
+            view_live_html: Vis hvordan denne category ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne category
+            delete: Fjern denne category permanent
+        products:
+          actions:
+            create_new: Lag en ny Product
+            reorder: Endre rekkefølgen på Products
+            reorder_done: Ferdig å endre rekkefølgen Products
+          records:
+            title: Products
+            sorry_no_results: Beklager! Vi fant ikke noen resultater.
+            no_items_yet: Det er ingen Products enda. Klikk på "Lag en ny Product"
+              for å legge til din første product.
+          product:
+            view_live_html: Vis hvordan denne product ser ut offentlig <br/><em>(åpner
+              i et nytt vindu)</em>
+            edit: Rediger denne product
+            delete: Fjern denne product permanent
+      categories:
+        show:
+          other: Andre Categories
+      products:
+        show:
+          other: Andre Products
+  activerecord:
+    attributes:
+      refinery/products/category:
+        title: Title
+      refinery/products/product:
+        title: Title
+        body: Body

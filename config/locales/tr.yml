@@ -1,0 +1,52 @@
+tr:
+  refinery:
+    plugins:
+      categories:
+        title: Categories
+      products:
+        title: Products
+    products:
+      admin:
+        categories:
+          actions:
+            create_new: Yeni Ekle Category
+            reorder: Tekrar sirala Categories
+            reorder_done: Tekrar siralama tamamlandiCategories
+          records:
+            title: Categories
+            sorry_no_results: Uzgunum! Herhangi bir sonuc bulunamadi.
+            no_items_yet: Herhangi bir Categories yok henuz.  Tikla "Yeni Ekle Category"
+              eklemek senin ilk category.
+          category:
+            view_live_html: Bunu canlu category goruntule <br/><em>(yeni bir pencerede
+              acar)</em>
+            edit: Bunu Duzenle category
+            delete: Bunu Sil category sonsuza dek
+        products:
+          actions:
+            create_new: Yeni Ekle Product
+            reorder: Tekrar sirala Products
+            reorder_done: Tekrar siralama tamamlandiProducts
+          records:
+            title: Products
+            sorry_no_results: Uzgunum! Herhangi bir sonuc bulunamadi.
+            no_items_yet: Herhangi bir Products yok henuz.  Tikla "Yeni Ekle Product"
+              eklemek senin ilk product.
+          product:
+            view_live_html: Bunu canlu product goruntule <br/><em>(yeni bir pencerede
+              acar)</em>
+            edit: Bunu Duzenle product
+            delete: Bunu Sil product sonsuza dek
+      categories:
+        show:
+          other: Diger Categories
+      products:
+        show:
+          other: Diger Products
+  activerecord:
+    attributes:
+      refinery/products/category:
+        title: Title
+      refinery/products/product:
+        title: Title
+        body: Body

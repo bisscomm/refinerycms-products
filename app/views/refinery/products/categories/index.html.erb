@@ -1,0 +1,11 @@
+<% content_for :body do %>
+  <ul id="categories">
+    <% @categories.each do |category| %>
+      <li>
+        <%= link_to category.title, refinery.products_category_path(category) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render '/refinery/content_page' %>

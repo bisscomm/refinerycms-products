@@ -1,0 +1,50 @@
+sk:
+  refinery:
+    plugins:
+      categories:
+        title: Categories
+      products:
+        title: Products
+    products:
+      admin:
+        categories:
+          actions:
+            create_new: Pridať Category
+            reorder: Preusporiadať Categories
+            reorder_done: Koniec radenia Categories
+          records:
+            title: Categories
+            sorry_no_results: "Ľutujeme, ale neboli nájdené žiadne výsledky."
+            no_items_yet: Nie sú vytvorené žiadne Categories. Kliknite na "Pridať
+              Category" pre pridanie prvého category.
+          category:
+            view_live_html: Zobraziť náhľad category<br/><em>(otvorí sa v novom okne)</em>
+            edit: Upraviť category
+            delete: Zmazať category
+        products:
+          actions:
+            create_new: Pridať Product
+            reorder: Preusporiadať Products
+            reorder_done: Koniec radenia Products
+          records:
+            title: Products
+            sorry_no_results: "Ľutujeme, ale neboli nájdené žiadne výsledky."
+            no_items_yet: Nie sú vytvorené žiadne Products. Kliknite na "Pridať Product"
+              pre pridanie prvého product.
+          product:
+            view_live_html: Zobraziť náhľad product<br/><em>(otvorí sa v novom okne)</em>
+            edit: Upraviť product
+            delete: Zmazať product
+      categories:
+        show:
+          other: Daľšie Categories
+      products:
+        show:
+          other: Daľšie Products
+  activerecord:
+    attributes:
+      refinery/products/category:
+        title: Title
+      refinery/products/product:
+        title: Title
+        body: Body

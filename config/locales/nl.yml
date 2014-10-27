@@ -1,0 +1,52 @@
+nl:
+  refinery:
+    plugins:
+      categories:
+        title: Categories
+      products:
+        title: Products
+    products:
+      admin:
+        categories:
+          actions:
+            create_new: Nieuwe Category toevoegen
+            reorder: De volgorde van de Categories wijzigen
+            reorder_done: Klaar met het wijzingen van de van de Category-volgorde
+          records:
+            title: Categories
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Categories. Druk op 'Nieuwe Category toevoegen'
+              om de eerste toe te voegen.
+          category:
+            view_live_html: Deze category op de website bekijken <br/><em>(opent in
+              een nieuw venster)</em>
+            edit: Bewerk deze category
+            delete: Deze category definitief verwijderen
+        products:
+          actions:
+            create_new: Nieuwe Product toevoegen
+            reorder: De volgorde van de Products wijzigen
+            reorder_done: Klaar met het wijzingen van de van de Product-volgorde
+          records:
+            title: Products
+            sorry_no_results: Helaas! Er zijn geen resultaten gevonden.
+            no_items_yet: Er zijn nog geen Products. Druk op 'Nieuwe Product toevoegen'
+              om de eerste toe te voegen.
+          product:
+            view_live_html: Deze product op de website bekijken <br/><em>(opent in
+              een nieuw venster)</em>
+            edit: Bewerk deze product
+            delete: Deze product definitief verwijderen
+      categories:
+        show:
+          other: Andere Categories
+      products:
+        show:
+          other: Andere Products
+  activerecord:
+    attributes:
+      refinery/products/category:
+        title: Title
+      refinery/products/product:
+        title: Title
+        body: Body

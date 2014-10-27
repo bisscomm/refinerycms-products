@@ -1,0 +1,50 @@
+cs:
+  refinery:
+    plugins:
+      categories:
+        title: Categories
+      products:
+        title: Products
+    products:
+      admin:
+        categories:
+          actions:
+            create_new: Přidat Category
+            reorder: "Řadit Categories"
+            reorder_done: Konec řazení Categories
+          records:
+            title: Categories
+            sorry_no_results: Litujeme, ale nebyly nalezny žádné výsledky.
+            no_items_yet: Zatím nebyly vytvořeny žádné Categories. Zvolte "Přidat
+              Category" pro přidání prvního category.
+          category:
+            view_live_html: Zobrazit náhled category<br/><em>(otevře se v novém okně)</em>
+            edit: Upravit category
+            delete: Smazat category
+        products:
+          actions:
+            create_new: Přidat Product
+            reorder: "Řadit Products"
+            reorder_done: Konec řazení Products
+          records:
+            title: Products
+            sorry_no_results: Litujeme, ale nebyly nalezny žádné výsledky.
+            no_items_yet: Zatím nebyly vytvořeny žádné Products. Zvolte "Přidat Product"
+              pro přidání prvního product.
+          product:
+            view_live_html: Zobrazit náhled product<br/><em>(otevře se v novém okně)</em>
+            edit: Upravit product
+            delete: Smazat product
+      categories:
+        show:
+          other: Další Categories
+      products:
+        show:
+          other: Další Products
+  activerecord:
+    attributes:
+      refinery/products/category:
+        title: Title
+      refinery/products/product:
+        title: Title
+        body: Body

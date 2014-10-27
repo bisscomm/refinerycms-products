@@ -1,0 +1,55 @@
+<%= form_for [refinery, :products_admin, @product] do |f| -%>
+  <%= render '/refinery/admin/error_messages',
+              :object => @product,
+              :include_object_name => true %>
+
+  <%= render '/refinery/admin/locale_picker',
+              :current_locale => Globalize.locale %>
+
+  <div class='field'>
+    <%= f.label :title -%>
+    <%= f.text_field :title, :class => 'larger widest' -%>
+  </div>
+
+  <div class='field'>
+    <%= render '/refinery/admin/wysiwyg',
+                :f => f,
+                :fields => [:body],
+                :object => "products/product" -%>
+  </div>
+
+  <%= render '/refinery/admin/form_advanced_options_menu', :f => f %>
+
+  <div id='more_options' style="display:none;">
+    <div class="hemisquare">
+      <h3><%= t('title', :scope => 'refinery.blog.admin.submenu.categories') %></h3>
+      <ul class='blog_categories'>
+        <% @categories.each do |category| %>
+          <li>
+             <%= check_box_tag 'product[category_ids][]', category.id,
+                               @product.categories.include?(category),
+                               :id => (id="product_category_ids_#{category.id}") %>
+             <%= label_tag 'product[category_ids][]', category.title,
+                           :class => 'stripped',
+                           :for => id %>
+          </li>
+        <% end %>
+      </ul>
+      <h3><%= t('.published_at') %></h3>
+      <%= f.datetime_select :published_at %>
+    </div>
+  </div>
+
+  <%= render '/refinery/admin/form_actions', :f => f,
+             :continue_editing => false,
+             :delete_title => t('delete', :scope => 'refinery.products.admin.products.product'),
+             :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @product.title) -%>
+<% end -%>
+
+<% content_for :javascripts do -%>
+  <script>
+    $(document).ready(function(){
+      page_options.init(false, '', '');
+    });
+  </script>
+<% end -%>

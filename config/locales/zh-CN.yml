@@ -1,0 +1,48 @@
+zh-CN:
+  refinery:
+    plugins:
+      categories:
+        title: Categories
+      products:
+        title: Products
+    products:
+      admin:
+        categories:
+          actions:
+            create_new: "建立新的 Category"
+            reorder: "对 Categories 重新排序"
+            reorder_done: "对 Categories 的重新排序结束"
+          records:
+            title: Categories
+            sorry_no_results: "对不起，未找到结果。"
+            no_items_yet: 目前没有 Categories . 点击 "Add New Category" 创建一个category.
+          category:
+            view_live_html: "查看 category 的最新内容.<br/><em>(新窗口中打开)</em>"
+            edit: "编辑 category"
+            delete: "永久删除 category"
+        products:
+          actions:
+            create_new: "建立新的 Product"
+            reorder: "对 Products 重新排序"
+            reorder_done: "对 Products 的重新排序结束"
+          records:
+            title: Products
+            sorry_no_results: "对不起，未找到结果。"
+            no_items_yet: 目前没有 Products . 点击 "Add New Product" 创建一个product.
+          product:
+            view_live_html: "查看 product 的最新内容.<br/><em>(新窗口中打开)</em>"
+            edit: "编辑 product"
+            delete: "永久删除 product"
+      categories:
+        show:
+          other: "其他 Categories"
+      products:
+        show:
+          other: "其他 Products"
+  activerecord:
+    attributes:
+      refinery/products/category:
+        title: Title
+      refinery/products/product:
+        title: Title
+        body: Body
