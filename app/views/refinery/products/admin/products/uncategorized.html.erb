@@ -1,0 +1,27 @@
+<%= render '/refinery/products/admin/submenu' %>
+<div id='records'>
+  <% if searching? %>
+    <h2><%= t('results_for', :scope => 'refinery.admin.search',
+                             :query => params[:search]) %></h2>
+    <% if @products.any? %>
+      <%= render :partial => "products",
+                 :collection => @products %>
+    <% else %>
+      <p><%= t('no_results', :scope => 'refinery.admin.search') %></p>
+    <% end %>
+  <% else %>
+    <% if @products.any? %>
+      <%= will_paginate @products %>
+
+      <%= render "sortable_list" %>
+
+      <%= will_paginate @products %>
+    <% else %>
+      <p>
+        <strong>
+          <%= t('.no_items_yet') %>
+        </strong>
+      </p>
+    <% end %>
+  <% end %>
+</div>
