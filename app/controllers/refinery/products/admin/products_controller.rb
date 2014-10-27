@@ -11,6 +11,10 @@ module Refinery
 
         before_filter :check_category_ids, :only => :update
 
+        def uncategorized
+          @products = Refinery::Products::Product.uncategorized.page(params[:page])
+        end
+
         private
           def product_params
             params.require(:product).permit(
