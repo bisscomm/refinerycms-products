@@ -4,7 +4,7 @@ module Refinery
       class CategoriesController < ::Refinery::AdminController
 
         crudify :'refinery/products/category',
-                :xhr_paging => true
+                :order => 'title ASC'
 
         private
           def category_params
