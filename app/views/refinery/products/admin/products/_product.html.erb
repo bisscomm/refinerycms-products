@@ -9,8 +9,16 @@
               :class => 'locale' %>
           <% end %>
       <% end %>
+
+      <%= product.published_at.try(:strftime, '%b %d, %Y') || 'draft' %>
+
+      <% if product.draft? %>
+        <span class="label notice"><%= t('refinery.products.admin.products.product.draft') %></span>
+        <% else %>
+          <%= product.published_at.strftime('%b %d, %Y') %>
+        <% end %>
+      </span>
     </span>
-  </span>
   <span class='actions'>
 
     <%= link_to refinery_icon_tag("application_go.png"), refinery.products_product_path(product),
