@@ -1,0 +1,15 @@
+module Refinery
+  module Products
+    class ShopController < ::ApplicationController
+      include ControllerHelper
+
+      before_filter :find_page, :find_all_products_categories
+
+      protected
+
+        def find_page
+          @page = Refinery::Page.find_by(:link_url => Refinery::Products.shop_path)
+        end
+    end
+  end
+end

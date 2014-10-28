@@ -1,34 +1,21 @@
 module Refinery
   module Products
-    class CategoriesController < ::ApplicationController
+    class CategoriesController < ShopController
+      include ControllerHelper
 
-      before_action :find_all_categories
-      before_action :find_page
-
-      def index
-        # you can use meta fields from your model instead (e.g. browser_title)
-        # by swapping @page for @category in the line below:
-        present(@page)
-      end
+      before_filter :find_page
+      before_filter :find_all_products_categories
 
       def show
-        @category = Category.find(params[:id])
-
-        # you can use meta fields from your model instead (e.g. browser_title)
-        # by swapping @page for @category in the line below:
-        present(@page)
+        @category = Refinery::Products::Category.friendly.find(params[:id])
+        @products = @category.products.live.includes(:categories).with_globalize.page(params[:page])
       end
 
-    protected
+      protected
 
-      def find_all_categories
-        @categories = Category.order('position ASC')
-      end
-
-      def find_page
-        @page = ::Refinery::Page.where(:link_url => "/categories").first
-      end
-
+        def find_page
+          @page = Refinery::Page.find_by(:link_url => "#{Refinery::Products.shop_path}#{Refinery::Products.products_categories_path}")
+        end
     end
   end
 end
