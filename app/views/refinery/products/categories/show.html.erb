@@ -4,10 +4,19 @@
 
 <% content_for :body do %>
   <section>
-    <h1>Title</h1>
-    <p>
-      <%=raw @category.title %>
-    </p>
+    <ul id="products">
+      <% @products.each do |product| %>
+        <li>
+          <h2><%= link_to product.title, refinery.products_product_path(product) %></h2>
+          <%= link_to refinery.products_product_path(product) do %>
+            <%= t('.read_more') %>
+            <span class="visuallyhidden"><%= product.title %></span>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= link_to t('.back_to'), refinery.products_categories_path %>
   </section>
 <% end %>
 
