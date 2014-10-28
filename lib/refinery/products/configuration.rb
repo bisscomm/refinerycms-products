@@ -3,10 +3,11 @@ module Refinery
     include ActiveSupport::Configurable
 
     config_accessor :products_per_page
-    config_accessor :page_path_products_index, :page_path_products_categories_index
+    config_accessor :shop_path, :products_path, :products_categories_path
 
     self.products_per_page = 10
-    self.page_path_products_index = "/products"
-    self.page_path_products_categories_index = "/products/categories"
+    self.shop_path = "/shop"
+    self.products_path = "/products"
+    self.products_categories_path = "/categories"
   end
 end
