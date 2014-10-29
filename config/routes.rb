@@ -16,7 +16,7 @@ Refinery::Core::Engine.routes.draw do
   # Admin routes
   namespace :products, :path => '' do
     namespace :admin, :path => Refinery::Core.backend_route do
-      scope :path => Refinery::Products.products_path do
+      scope :path => Refinery::Products.shop_path do
         root :to => "products#index"
 
         resources :products, :except => :show do
