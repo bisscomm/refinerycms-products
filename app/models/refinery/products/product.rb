@@ -9,6 +9,7 @@ module Refinery
 
       friendly_id :friendly_id_source, :use => [:slugged, :globalize]
 
+      has_many_page_images
       has_many :categorizations, :dependent => :destroy, :foreign_key => :product_id
       has_many :categories, :through => :categorizations, :source => :products_category
 
