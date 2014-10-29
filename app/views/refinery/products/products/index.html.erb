@@ -2,7 +2,20 @@
   <ul id="products">
     <% @products.each do |product| %>
       <li>
-        <%= link_to product.title, refinery.products_product_path(product) %>
+        <%= link_to refinery.products_product_path(product) do %>
+          <%= image_tag(product.images.first.thumbnail(geometry: "200x200#c").url) unless product.images.first.nil? %>
+          <h2><%= product.title %></h2>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% content_for :side_body do %>
+  <ul id="categories">
+    <% @categories.each do |category| %>
+      <li>
+        <%= link_to category.title, refinery.products_category_path(category) %>
       </li>
     <% end %>
   </ul>
