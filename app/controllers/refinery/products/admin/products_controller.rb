@@ -4,12 +4,16 @@ module Refinery
       class ProductsController < ::Refinery::AdminController
 
         crudify :'refinery/products/product',
-                :xhr_paging => true
+                :order => 'title ASC',
+                :include => [:translations]
 
         before_filter :find_all_categories,
                       :only => [:new, :edit, :create, :update]
+        before_filter :find_all_properties,
+                      :only => [:new, :edit, :create, :update]
 
         before_filter :check_category_ids, :only => :update
+        before_filter :check_property_ids, :only => :update
 
         def uncategorized
           @products = Refinery::Products::Product.uncategorized.page(params[:page])
@@ -22,7 +26,8 @@ module Refinery
               :body,
               :published_at,
               :draft,
-              :category_ids => []
+              :category_ids => [],
+              :property_ids => []
             )
           end
 
@@ -32,8 +37,16 @@ module Refinery
             @categories = Refinery::Products::Category.all
           end
 
+          def find_all_properties
+            @properties = Refinery::Products::Property.all
+          end
+
           def check_category_ids
             product_params[:category_ids] ||= []
+          end
+
+          def check_property_ids
+            product_params[:property_ids] ||= []
           end
 
       end

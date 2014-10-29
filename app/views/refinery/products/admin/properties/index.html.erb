@@ -1,0 +1,21 @@
+<%= render '/refinery/products/admin/submenu' %>
+<%= render 'refinery/admin/search_header', :url => request.path %>
+<div id='records'>
+  <% if @properties.any? %>
+    <%= will_paginate @properties %>
+
+    <%= render "sortable_list" %>
+
+    <%= will_paginate @properties %>
+  <% else %>
+    <% if searching? %>
+      <%= t('no_results', :scope => 'refinery.admin.search') %>
+    <% else %>
+      <p>
+        <strong>
+          <%= t('.no_items_yet', :create => t('new', :scope => 'refinery.products.admin.submenu.properties')) %>
+        </strong>
+      </p>
+    <% end %>
+  <% end %>
+</div>

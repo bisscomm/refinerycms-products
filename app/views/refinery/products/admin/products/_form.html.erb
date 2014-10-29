@@ -40,8 +40,26 @@
 
   <div id='more_options' style="display:none;">
     <div class="hemisquare">
-      <h3><%= t('title', :scope => 'refinery.blog.admin.submenu.categories') %></h3>
-      <ul class='blog_categories'>
+
+      <h3><%= t('title', :scope => 'refinery.products.admin.submenu.properties') %></h3>
+      <ul class='products_properties'>
+        <% @properties.each do |property| %>
+          <li>
+              <%= f.label property.title %>
+              <% if @product.properties.include?(property) %>
+                <%= f.text_field :title, value: @product.properties.value, :class => 'larger widest' -%>
+              <% else %>
+                <%= f.text_field :title, :class => 'larger widest' -%>
+              <% end %>
+
+              <%= debug  p = @product.propertizations.where("products_property_id = ?", property.id).first %>
+              <%= f.text_field :title, :class => 'larger widest' -%>
+          </li>
+        <% end %>
+      </ul>
+
+      <h3><%= t('title', :scope => 'refinery.products.admin.submenu.categories') %></h3>
+      <ul class='products_categories'>
         <% @categories.each do |category| %>
           <li>
              <%= check_box_tag 'product[category_ids][]', category.id,

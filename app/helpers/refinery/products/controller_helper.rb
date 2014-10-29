@@ -21,6 +21,10 @@ module Refinery
         def find_all_products_categories
           @categories = Refinery::Products::Category.translated
         end
+
+        def find_all_products_properties
+          @categories = Refinery::Products::Property.translated
+        end
     end
   end
 end
