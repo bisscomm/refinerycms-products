@@ -43,21 +43,22 @@
 
       <h3><%= t('title', :scope => 'refinery.products.admin.submenu.properties') %></h3>
       <ul class='products_properties'>
-        <% @properties.each do |property| %>
+        <%= f.fields_for :propertizations do |ff| %>
           <li>
-              <%= f.label property.title %>
-              <% if @product.properties.include?(property) %>
-                <%= f.text_field :title, value: @product.properties.value, :class => 'larger widest' -%>
-              <% else %>
-                <%= f.text_field :title, :class => 'larger widest' -%>
-              <% end %>
-
-              <%= debug  p = @product.propertizations.where("products_property_id = ?", property.id).first %>
-              <%= f.text_field :title, :class => 'larger widest' -%>
+            <%= ff.check_box :_destroy,
+                  {:checked => ff.object.persisted?},
+                  '0', '1'
+            %>
+            <%= ff.label :_destroy, ff.object.products_property.title, :class => 'stripped' %>
+            <%= ff.hidden_field :product_id %>
+            <%= ff.hidden_field :products_property_id %>
+            <%= ff.text_field :value, :class => 'widest' %>
           </li>
         <% end %>
       </ul>
+    </div>
 
+    <div class='hemisquare right_side'>
       <h3><%= t('title', :scope => 'refinery.products.admin.submenu.categories') %></h3>
       <ul class='products_categories'>
         <% @categories.each do |category| %>

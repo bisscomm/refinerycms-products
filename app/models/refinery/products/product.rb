@@ -17,6 +17,8 @@ module Refinery
       has_many :propertizations, :dependent => :destroy, :foreign_key => :product_id
       has_many :properties, :through => :propertizations, :source => :products_property
 
+      accepts_nested_attributes_for :propertizations, allow_destroy: true
+
       validates :title, :presence => true, :uniqueness => true
       validates :published_at, :presence => true
 
