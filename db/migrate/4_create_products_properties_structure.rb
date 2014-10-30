@@ -15,7 +15,7 @@ class CreateProductsPropertiesStructure < ActiveRecord::Migration
       t.text :value
     end
 
-    add_index :refinery_products_properties_products, [:products_property_id, :product_id], :name => 'index_products_properties_products_on_pp_and_p'
+    add_index :refinery_products_properties_products, [ :products_property_id, :product_id ], :unique => true, :name => 'index_products_properties_products_on_pp_and_p'
   end
 
   def down

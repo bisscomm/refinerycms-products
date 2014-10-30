@@ -50,8 +50,9 @@
                   '0', '1'
             %>
             <%= ff.label :_destroy, ff.object.products_property.title, :class => 'stripped' %>
-            <%= ff.hidden_field :product_id %>
+            <%= ff.hidden_field :id %>
             <%= ff.hidden_field :products_property_id %>
+            <%= ff.hidden_field :product_id %>
             <%= ff.text_field :value, :class => 'widest' %>
           </li>
         <% end %>
