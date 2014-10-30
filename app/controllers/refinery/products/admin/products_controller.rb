@@ -23,8 +23,7 @@ module Refinery
               :body,
               :published_at,
               :draft,
-              :category_ids => [],
-              :property_ids => []
+              :category_ids => []
             )
           end
 
