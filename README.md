@@ -5,6 +5,7 @@ Products engine for [Refinery CMS](http://refinerycms.com) allows you to display
 ### In summary you can:
 * Manage products
 * Manage product images
+* Manage product properties
 * Manage product categories
 
 ## Requirements
