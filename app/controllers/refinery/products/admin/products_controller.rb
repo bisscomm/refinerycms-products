@@ -4,7 +4,7 @@ module Refinery
       class ProductsController < ::Refinery::AdminController
 
         crudify :'refinery/products/product',
-                :order => 'title ASC',
+                :order => 'updated_at DESC',
                 :include => [:translations]
 
         before_filter :find_all_categories,
