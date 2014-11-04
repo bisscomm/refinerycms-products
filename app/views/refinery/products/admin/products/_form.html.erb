@@ -69,12 +69,12 @@
     <div class='hemisquare right_side'>
       <h3><%= t('title', :scope => 'refinery.products.admin.submenu.categories') %></h3>
       <ul class='products_categories'>
-        <% @categories.each do |category| %>
+        <% @categories.sort_by { |c| c.lft }.each do |category| %>
           <li>
-             <%= check_box_tag 'product[category_ids][]', category.id,
+            <%= check_box_tag 'product[category_ids][]', category.id,
                                @product.categories.include?(category),
                                :id => (id="product_category_ids_#{category.id}") %>
-             <%= label_tag 'product[category_ids][]', category.title,
+            <%= label_tag 'product[category_ids][]', "#{'-' * category.level} #{category.title}",
                            :class => 'stripped',
                            :for => id %>
           </li>

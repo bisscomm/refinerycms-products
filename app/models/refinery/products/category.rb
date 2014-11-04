@@ -2,6 +2,7 @@ module Refinery
   module Products
     class Category < Refinery::Core::BaseModel
       extend FriendlyId
+      acts_as_nested_set
 
       translates :title, :slug
 

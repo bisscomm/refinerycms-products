@@ -7,6 +7,8 @@ module Refinery
                 :order => 'updated_at DESC',
                 :include => [:translations]
 
+        helper :'refinery/products/admin/categories'
+
         before_filter :find_all_categories,
                       :only => [:new, :edit, :create, :update]
 
