@@ -1,0 +1,9 @@
+.products_properties {
+  textarea {
+    background: #fff;
+
+    &[disabled] {
+      background: #F2F2F2;
+    }
+  }
+}

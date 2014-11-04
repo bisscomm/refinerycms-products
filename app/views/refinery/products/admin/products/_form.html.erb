@@ -92,10 +92,5 @@
              :delete_confirmation => t('message', :scope => 'refinery.admin.delete', :title => @product.title) -%>
 <% end -%>
 
-<% content_for :javascripts do -%>
-  <script>
-    $(document).ready(function(){
-      page_options.init(false, '', '');
-    });
-  </script>
-<% end -%>
+<% content_for :stylesheets, stylesheet_link_tag('refinery/products/backend') %>
+<% content_for :javascripts, javascript_include_tag('refinery/products/backend') %>
