@@ -20,6 +20,12 @@
     <%= f.select :parent_id, parent_id_nested_set_options(@category), :include_blank => true %>
   </div>
 
+  <div class='field'>
+    <%= f.label :promote -%>
+    <%= f.check_box :promote, :class => 'larger widest' -%>
+  </div>
+
+
   <%= render '/refinery/admin/form_actions', :f => f,
              :continue_editing => false,
              :delete_title => t('delete', :scope => 'refinery.categories.admin.categories.category'),
