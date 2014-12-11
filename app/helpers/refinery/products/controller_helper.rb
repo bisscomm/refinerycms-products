@@ -18,8 +18,12 @@ module Refinery
           @products = Refinery::Products::Product.live.includes(:categories).with_globalize.newest_first.page(params[:page])
         end
 
-        def find_all_products_categories
-          @categories = Refinery::Products::Category.translated
+        def find_all_root_products_categories
+          @products_categories = Refinery::Products::Category.translated.where(parent_id: nil).order(:lft)
+        end
+
+        def find_all_promoted_root_products_categories
+          @promoted_products_categories = Refinery::Products::Category.translated.where(parent_id: nil, promote: 1).order(:lft)
         end
 
         def find_all_products_properties
