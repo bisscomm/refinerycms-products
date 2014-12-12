@@ -36,7 +36,7 @@ module Refinery
 
       acts_as_nested_set :dependent => :destroy
 
-      friendly_id :custom_slug_or_title, FriendlyIdOptions.options
+      friendly_id :title, FriendlyIdOptions.options
 
       belongs_to :photo, :class_name => '::Refinery::Image'
 
@@ -113,13 +113,6 @@ module Refinery
         def with_globalize(conditions = {})
           Categories::Finder.with_globalize(conditions)
         end
-      end
-
-      # Returns in cascading order: custom_slug or menu_title or title depending on
-      # which attribute is first found to be present for this page.
-      def custom_slug_or_title
-        (Refinery::Categories.use_custom_slugs && custom_slug.presence) ||
-          title.presence
       end
 
       def nested_url
