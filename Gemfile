@@ -10,6 +10,18 @@ git 'git://github.com/refinery/refinerycms.git', :branch => 'master' do
   end
 end
 
+gem 'refinerycms-page-images',
+  git: 'https://github.com/refinery/refinerycms-page-images',
+  branch: 'master'
+
+gem 'refinerycms-i18n',
+  git: 'https://github.com/refinery/refinerycms-i18n',
+  branch: 'master'
+
+gem 'refinerycms-wymeditor',
+  git: 'https://github.com/parndt/refinerycms-wymeditor',
+  branch: 'master'
+
 # Database Configuration
 platforms :jruby do
   gem 'activerecord-jdbcsqlite3-adapter'
