@@ -1,28 +1,46 @@
-<li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(category) -%>">
-  <span class='title'>
-    <%= category.title.presence || category.translations.detect {|t| t.title.present?}.title %>
-    <span class="preview">
-      <% category.translations.each do |translation| %>
-        <% if translation.title.present? %>
-          <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
-              refinery.edit_products_admin_category_path(category, :switch_locale => translation.locale),
-              :class => 'locale' %>
-          <% end %>
-      <% end %>
+<li class='clearfix record icons' id="<%= dom_id(category) -%>">
+  <div class='clearfix'>
+    <% if category.children.present? %>
+      <span class="icon toggle expanded" title="<%= t('expand_collapse', :scope => 'refinery.admin.categories') %>"></span>
+    <% else %>
+      <span class="icon"></span>
+    <% end %>
+
+    <span class='title <%= 'toggle' if category.children.present? %>'>
+      <%= category.title.presence || category.translations.detect {|t| t.title.present?}.title %>
     </span>
-  </span>
-  <span class='actions'>
+    <% if Refinery::I18n.frontend_locales.many? %>
+      <span class='locales'>
+        <% category.translations.sort_by{|t| Refinery::I18n.frontend_locales.index(t.locale)}.each do |translation| %>
+          <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
+                      refinery.edit_products_admin_category_path(category.nested_url, :switch_locale => translation.locale),
+                      :class => 'locale' if translation.title.present? %>
+        <% end %>
+      </span>
+    <% end %>
 
-    <%= link_to refinery_icon_tag("application_go.png"), refinery.products_category_path(category),
-        :title => t('.view_live_html'),
-        :target => "_blank" %>
+    <span class='actions'>
+      <%= link_to refinery_icon_tag('page_add.png'),
+                  refinery.new_products_admin_category_path(:parent_id => category.id),
+                  :title => t('new', :scope => 'refinery.admin.categories') %>
 
-    <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_products_admin_category_path(category),
-         :title => t('.edit') %>
-    <%= link_to refinery_icon_tag("delete.png"), refinery.products_admin_category_path(category),
-        :class => "cancel confirm-delete",
-        :title => t('.delete'),
-        :data => {:confirm => t('message', :scope => 'refinery.admin.delete', :title => category.title)},
-        :method => :delete %>
-  </span>
+      <%= link_to refinery_icon_tag('application_edit.png'),
+                  refinery.products_admin_edit_category_path(category.nested_url, :switch_locale => (category.translations.first.locale unless category.translated_to_default_locale?)),
+                  :title => t('edit', :scope => 'refinery.admin.categories') %>
+
+      <%= link_to refinery_icon_tag('delete.png'),
+                  refinery.products_admin_delete_category_path(category.nested_url),
+                  :class => "cancel confirm-delete",
+                  :title => t('delete', :scope => 'refinery.admin.categories'),
+                  :data => {
+                    :confirm => t('message',
+                      :scope => 'refinery.admin.delete',
+                      :title => category.title.presence || category.translations.detect {|t| t.title.present?}.title
+                    )
+                  } %>
+    </span>
+  </div>
+  <ul class='nested' data-ajax-content="<%= refinery.products_admin_children_categories_path(category.nested_url) %>">
+    <%= render(:partial => 'category', :collection => category.children) %>
+  </ul>
 </li>

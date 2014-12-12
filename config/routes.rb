@@ -2,7 +2,10 @@ Refinery::Core::Engine.routes.draw do
 
   # Frontend routes
   namespace :products, :path => Refinery::Products.shop_path do
-    root :to => "products#index"
+    # root :to => "products#index"
+
+    root to: "products#index", via: :get
+    get '/categories/:id', to: 'categories#show', as: :category
 
     scope :path => Refinery::Products.products_path do
       resources :products, :path => '', :as => :products, :controller => 'products'
@@ -26,7 +29,14 @@ Refinery::Core::Engine.routes.draw do
           end
         end
 
-        resources :categories
+        get 'categories/*path/edit', to: 'categories#edit', as: 'edit_category'
+        get 'categories/*path/children', to: 'categories#children', as: 'children_categories'
+        patch 'categories/*path', to: 'categories#update', as: 'update_category'
+        delete 'categories/*path', to: 'categories#destroy', as: 'delete_category'
+
+        resources :categories, except: :show do
+          post :update_positions, on: :collection
+        end
 
         resources :properties
       end

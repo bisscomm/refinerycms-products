@@ -1,4 +1,6 @@
-<%= form_for [refinery, :products_admin, @category] do |f| -%>
+<%= form_for [refinery, :products_admin, @category],
+             :url => (refinery.products_admin_category_path(@category.nested_url) if @category.persisted?) do |f| %>
+
   <%= render '/refinery/admin/error_messages',
               :object => @category,
               :include_object_name => true %>
