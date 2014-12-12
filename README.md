@@ -1,12 +1,11 @@
 # Refinery CMS Products
 
-Products engine for [Refinery CMS](http://refinerycms.com) allows you to display products.
+Products engine for [Refinery CMS](http://refinerycms.com) allows you to display translated products.
 
 ### In summary you can:
-* Manage products
-* Manage product images
-* Manage product properties
-* Manage product categories
+* Manage products (with images, file, properties)
+* Manage product properties (with custom value)
+* Manage product categories (with images and promote option)
 
 ## Requirements
 
