@@ -51,7 +51,3 @@ if defined?(::Refinery::Page)
     })
   end
 end
-
-(Refinery::Inquiries::Setting.methods.sort - Refinery::Setting.methods).each do |setting|
-  Refinery::Inquiries::Setting.send(setting) if setting.to_s !~ /=\z/
-end
