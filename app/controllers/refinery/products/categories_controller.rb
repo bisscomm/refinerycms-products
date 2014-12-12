@@ -1,10 +1,10 @@
 module Refinery
   module Products
     class CategoriesController < ShopController
-      include ControllerHelper
+      include Refinery::Products::ControllerHelper
 
       before_filter :find_page
-      before_filter :find_all_products_categories
+
 
       def show
         @category = Refinery::Products::Category.friendly.find(params[:id])

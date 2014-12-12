@@ -1,9 +1,9 @@
 module Refinery
   module Products
     class ShopController < ::ApplicationController
-      include ControllerHelper
+      include Refinery::Products::ControllerHelper
 
-      before_filter :find_page, :find_all_products_categories
+      before_filter :find_page, :find_all_root_products_categories
 
       protected
 

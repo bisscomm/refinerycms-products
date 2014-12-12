@@ -24,7 +24,7 @@
   <aside>
     <h2><%= t('.other') %></h2>
     <ul id="categories">
-      <% @categories.each do |category| %>
+      <% @products_categories.each do |category| %>
         <li>
           <%= link_to category.title, refinery.products_category_path(category) %>
         </li>
