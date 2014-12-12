@@ -1,12 +1,27 @@
 en:
   refinery:
     plugins:
-      categories:
-        title: Categories
-      products:
+      refinerycms_products:
         title: Products
     products:
       admin:
+        submenu:
+          categories:
+            title: Categories
+            manage: Manage
+            new: Create new category
+          products:
+            title: Products
+            manage: Manage products
+            new: Create new product
+            uncategorized: Uncategorized products
+          properties:
+            title: Properties
+            manage: Manage properties
+            new: Create new property
+            uncategorized: Uncategorized properties
+
+
         categories:
           actions:
             create_new: Add New Category
@@ -41,10 +56,17 @@ en:
       products:
         show:
           other: Other Products
+
   activerecord:
+    models:
+      refinery/products/category: Category
+      refinery/products/product: Product
+      refinery/products/property: Property
     attributes:
       refinery/products/category:
         title: Title
       refinery/products/product:
         title: Title
         body: Body
+      refinery/products/property:
+        title: Title
