@@ -13,6 +13,15 @@
   </div>
 
   <div class='field'>
+    <%= f.label :photo -%>
+    <%= render '/refinery/admin/image_picker',
+               :f => f,
+               :field => :photo_id,
+               :image => @category.photo,
+               :toggle_image_display => false -%>
+  </div>
+
+  <div class='field'>
     <span class='label_with_help'>
       <%= f.label :parent_id, t('.parent_category') %>
       <%= refinery_help_tag t('.parent_category_help') %>

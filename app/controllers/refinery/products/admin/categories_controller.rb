@@ -8,7 +8,7 @@ module Refinery
 
         private
           def category_params
-            params.require(:category).permit(:title, :parent_id, :promote)
+            params.require(:category).permit(:title, :photo_id, :parent_id, :promote)
           end
       end
     end

@@ -8,6 +8,8 @@ module Refinery
 
       friendly_id :title, :use => [:slugged, :globalize]
 
+      belongs_to :photo, :class_name => '::Refinery::Image'
+
       has_many :categorizations, :dependent => :destroy, :foreign_key => :products_category_id
       has_many :products, :through => :categorizations, :source => :product
 
