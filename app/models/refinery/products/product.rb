@@ -38,10 +38,6 @@ module Refinery
         !draft && published_at <= Time.now
       end
 
-      def friendly_id_source
-        title
-      end
-
       class << self
 
         # Wrap up the logic of finding the pages based on the translations table.
