@@ -7,6 +7,10 @@ Products engine for [Refinery CMS](http://refinerycms.com) allows you to display
 * Manage product properties (with custom value)
 * Manage product categories (with images and promote option)
 
+### Steps before version 1.0 ###
+* Add nested categorization for products (Work in Progress, help appreciated)
+* Rename this engine for refinerycms-catalog
+
 ## Requirements
 
 This version of `refinerycms-products` supports Refinery 3.x and Rails 4.1.x.
