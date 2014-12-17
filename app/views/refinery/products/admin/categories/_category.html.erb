@@ -20,6 +20,15 @@
     <% end %>
 
     <span class='actions'>
+      <%#= link_to refinery_icon_tag('page_add.png'),
+                  refinery.new_products_admin_category_path(:parent_id => category.id),
+                  :title => t('new', :scope => 'refinery.admin.categories') %>
+
+      <%#= link_to refinery_icon_tag('application_edit.png'),
+                  refinery.products_admin_edit_category_path(category.nested_url, :switch_locale => (category.translations.first.locale unless category.translated_to_default_locale?)),
+                  :title => t('edit', :scope => 'refinery.admin.categories') %>
+
+
       <%= link_to refinery_icon_tag('page_add.png'),
                   refinery.new_products_admin_category_path(:parent_id => category.id),
                   :title => t('new', :scope => 'refinery.admin.categories') %>
@@ -28,16 +37,18 @@
                   refinery.products_admin_edit_category_path(category.nested_url, :switch_locale => (category.translations.first.locale unless category.translated_to_default_locale?)),
                   :title => t('edit', :scope => 'refinery.admin.categories') %>
 
+
       <%= link_to refinery_icon_tag('delete.png'),
                   refinery.products_admin_delete_category_path(category.nested_url),
                   :class => "cancel confirm-delete",
-                  :title => t('delete', :scope => 'refinery.admin.categories'),
+                  :title => t('delete', :scope => 'refinery.admin.pages'),
                   :data => {
                     :confirm => t('message',
                       :scope => 'refinery.admin.delete',
                       :title => category.title.presence || category.translations.detect {|t| t.title.present?}.title
                     )
-                  } %>
+                  },
+                  :method => :delete %>
     </span>
   </div>
   <ul class='nested' data-ajax-content="<%= refinery.products_admin_children_categories_path(category.nested_url) %>">

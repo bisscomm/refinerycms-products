@@ -8,6 +8,10 @@ module Refinery
                 :include => [:translations, :children],
                 :paging => false
 
+        def new
+          @category = Category.new(new_category_params)
+        end
+
         def children
           @category = find_category
           render :layout => false
@@ -37,9 +41,13 @@ module Refinery
             end
           end
 
-        private
+        protected
           def category_params
             params.require(:category).permit(:title, :photo_id, :parent_id, :promote)
+          end
+
+          def new_category_params
+            params.permit(:parent_id)
           end
       end
     end
