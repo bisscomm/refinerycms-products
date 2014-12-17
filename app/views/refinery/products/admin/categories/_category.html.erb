@@ -20,15 +20,6 @@
     <% end %>
 
     <span class='actions'>
-      <%#= link_to refinery_icon_tag('page_add.png'),
-                  refinery.new_products_admin_category_path(:parent_id => category.id),
-                  :title => t('new', :scope => 'refinery.admin.categories') %>
-
-      <%#= link_to refinery_icon_tag('application_edit.png'),
-                  refinery.products_admin_edit_category_path(category.nested_url, :switch_locale => (category.translations.first.locale unless category.translated_to_default_locale?)),
-                  :title => t('edit', :scope => 'refinery.admin.categories') %>
-
-
       <%= link_to refinery_icon_tag('page_add.png'),
                   refinery.new_products_admin_category_path(:parent_id => category.id),
                   :title => t('new', :scope => 'refinery.admin.categories') %>
@@ -36,7 +27,6 @@
       <%= link_to refinery_icon_tag('application_edit.png'),
                   refinery.products_admin_edit_category_path(category.nested_url, :switch_locale => (category.translations.first.locale unless category.translated_to_default_locale?)),
                   :title => t('edit', :scope => 'refinery.admin.categories') %>
-
 
       <%= link_to refinery_icon_tag('delete.png'),
                   refinery.products_admin_delete_category_path(category.nested_url),

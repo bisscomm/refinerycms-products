@@ -35,7 +35,7 @@ module Refinery
           translations_conditions = translations_conditions(globalized_conditions)
 
           # A join implies readonly which we don't really want.
-          Category.where(globalized_conditions).
+          ::Refinery::Products::Category.where(globalized_conditions).
                joins(:translations).
                where(translations_conditions).
                readonly(false)
@@ -45,14 +45,14 @@ module Refinery
         attr_accessor :conditions
 
         def translated_attributes
-          Category.translated_attribute_names.map(&:to_s) | %w(locale)
+          ::Refinery::Products::Category.translated_attribute_names.map(&:to_s) | %w(locale)
         end
 
         def translations_conditions(original_conditions)
           translations_conditions = {}
           original_conditions.keys.each do |key|
             if translated_attributes.include? key.to_s
-              translations_conditions["#{Category.translation_class.table_name}.#{key}"] = original_conditions.delete(key)
+              translations_conditions["#{::Refinery::Products::Category.translation_class.table_name}.#{key}"] = original_conditions.delete(key)
             end
           end
           translations_conditions
@@ -159,12 +159,12 @@ module Refinery
         def find
           if path.present?
             if path.friendly_id?
-              Category.friendly.find_by_path(path)
+              ::Refinery::Products::Category.friendly.find_by_path(path)
             else
-              Category.friendly.find(path)
+              ::Refinery::Products::Category.friendly.find(path)
             end
           elsif id.present?
-            Category.friendly.find(id)
+            ::Refinery::Products::Category.friendly.find(id)
           end
         end
 

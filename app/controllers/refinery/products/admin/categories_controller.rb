@@ -42,6 +42,11 @@ module Refinery
           end
 
         protected
+          def after_update_positions
+            find_all_pages
+            render :partial => '/refinery/admin/pages/sortable_list' and return
+          end
+
           def category_params
             params.require(:category).permit(:title, :photo_id, :parent_id, :promote)
           end
