@@ -97,52 +97,52 @@ module Refinery
         end
 
         def find
-          if slugs_scoped_by_parent?
-            FinderByScopedPath.new(path).find
-          else
+          # if slugs_scoped_by_parent?
+          #   FinderByScopedPath.new(path).find
+          # else
             FinderByUnscopedPath.new(path).find
-          end
+          # end
         end
 
         private
         attr_accessor :path
 
-        def slugs_scoped_by_parent?
-          ::Refinery::Categories.scope_slug_by_parent
-        end
+        # def slugs_scoped_by_parent?
+        #   ::Refinery::Products::Categories.scope_slug_by_parent
+        # end
 
         def by_slug(slug_path, conditions = {})
           Finder.by_slug(slug_path, conditions)
         end
       end
 
-      class FinderByScopedPath < FinderByPath
-        def find
-          # With slugs scoped to the parent category we need to find a category by its full path.
-          # For example with about/example we would need to find 'about' and then its child
-          # called 'example' otherwise it may clash with another category called /example.
-          category = parent_category
-          while category && path_segments.any? do
-            category = next_category(category)
-          end
-          category
-        end
+      # class FinderByScopedPath < FinderByPath
+      #   def find
+      #     # With slugs scoped to the parent category we need to find a category by its full path.
+      #     # For example with about/example we would need to find 'about' and then its child
+      #     # called 'example' otherwise it may clash with another category called /example.
+      #     category = parent_category
+      #     while category && path_segments.any? do
+      #       category = next_category(category)
+      #     end
+      #     category
+      #   end
 
-        private
+      #   private
 
-        def path_segments
-          @path_segments ||= path.split('/').select(&:present?)
-        end
+      #   def path_segments
+      #     @path_segments ||= path.split('/').select(&:present?)
+      #   end
 
-        def parent_category
-          by_slug(path_segments.shift, :parent_id => nil).first
-        end
+      #   def parent_category
+      #     by_slug(path_segments.shift, :parent_id => nil).first
+      #   end
 
-        def next_category(category)
-          slug_or_id = path_segments.shift
-          category.children.by_slug(slug_or_id).first || category.children.find(slug_or_id)
-        end
-      end
+      #   def next_category(category)
+      #     slug_or_id = path_segments.shift
+      #     category.children.by_slug(slug_or_id).first || category.children.find(slug_or_id)
+      #   end
+      # end
 
       class FinderByUnscopedPath < FinderByPath
         def find
