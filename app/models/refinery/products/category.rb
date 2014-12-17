@@ -1,4 +1,4 @@
-require 'refinery/categories/finder'
+require 'refinery/products/categories/finder'
 
 module Refinery
   module Products
