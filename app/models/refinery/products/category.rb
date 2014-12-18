@@ -1,4 +1,6 @@
 require 'friendly_id'
+require 'refinery/core/base_model'
+require 'refinery/products/categories/url'
 require 'refinery/products/categories/finder'
 
 module Refinery
@@ -122,6 +124,19 @@ module Refinery
         persisted? && translations.any?{|t| t.locale == Refinery::I18n.default_frontend_locale}
       end
 
+      # The canonical page for this particular page.
+      # Consists of:
+      #   * The default locale's translated slug
+      def canonical
+        Globalize.with_locale(::Refinery::I18n.default_frontend_locale) { url }
+      end
+
+      # The canonical slug for this particular page.
+      # This is the slug for the default frontend locale.
+      def canonical_slug
+        Globalize.with_locale(::Refinery::I18n.default_frontend_locale) { slug }
+      end
+
       # Returns the full path to this page.
       # This automatically prints out this page title and all parent page titles.
       # The result is joined by the path_separator argument.
@@ -166,9 +181,9 @@ module Refinery
       #   title_changed?
       # end
 
-      # def self.translated
-      #   with_translations(::Globalize.locale)
-      # end
+      def self.translated
+        with_translations(::Globalize.locale)
+      end
 
       # def category_count
       #   categories.live.with_globalize.count
