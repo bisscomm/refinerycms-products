@@ -11,7 +11,7 @@
           <%= link_to image_tag(image.thumbnail(geometry: "200x200#c").url),
                       image.thumbnail(geometry: "900x600").url %>
         </li>
-     <% end %>
+      <% end %>
     </ul>
 
     <h2>Body</h2>
@@ -19,7 +19,7 @@
       <%=raw @product.body %>
     </p>
 
-    <%= link_to t('.back_to'), refinery.products_products_path %>
+    <%= link_to t('.back_to'), :back %>
   </section>
 <% end %>
 
@@ -29,7 +29,7 @@
     <ul id="products">
       <% @products_categories.each do |product| %>
         <li>
-          <%= link_to product.title, refinery.products_product_path(product) %>
+          <%= link_to product.title, refinery.products_category_path(product) %>
         </li>
       <% end %>
     </ul>

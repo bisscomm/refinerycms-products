@@ -5,18 +5,10 @@
 <% content_for :body do %>
   <section>
     <ul id="products">
-      <% @products.each do |product| %>
-        <li>
-          <h2><%= link_to product.title, refinery.products_product_path(product) %></h2>
-          <%= link_to refinery.products_product_path(product) do %>
-            <%= t('.read_more') %>
-            <span class="visuallyhidden"><%= product.title %></span>
-          <% end %>
-        </li>
-      <% end %>
+      <%= render :partial => '/refinery/products/shared/product', :collection => @products %>
     </ul>
 
-    <%= link_to t('.back_to'), refinery.products_categories_path %>
+    <%= link_to t('.back_to'), :back %>
   </section>
 <% end %>
 

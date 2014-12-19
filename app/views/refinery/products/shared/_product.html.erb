@@ -1,0 +1,19 @@
+<li id="product_#{product.id}" class="product">
+  <div class="title">
+    <h2><%= link_to product.title, refinery.products_product_path(product) %></h2>
+  </div>
+
+  <div class="image">
+    <%= link_to refinery.products_product_path(product) do %>
+      <%= image_fu product.images.first, '242x200#c' %>
+    <% end %>
+  </div>
+
+  <div class="properties">
+    <% product.propertizations.each do |property| %>
+      <%= Refinery::Products::Property.find_by(id: property.products_property_id).title %> : <%= property.value  %>
+    <% end %>
+  </div>
+
+  <%= link_to t('.read_more'), refinery.products_product_path(product) %>
+</li>
