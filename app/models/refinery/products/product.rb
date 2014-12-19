@@ -7,7 +7,7 @@ module Refinery
 
       translates :title, :body, :slug
 
-      friendly_id :friendly_id_source, :use => [:slugged, :globalize]
+      friendly_id :title, :use => [:slugged, :globalize]
 
       belongs_to :file, :class_name => '::Refinery::Resource'
 
