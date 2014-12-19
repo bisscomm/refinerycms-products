@@ -22,7 +22,7 @@ module Refinery
 
         class Marketable < Url
           def self.handle?(category)
-            Refinery::Products::Categories.marketable_urls
+            Refinery::Pages.marketable_urls
           end
 
           def url
@@ -67,7 +67,7 @@ module Refinery
         end
 
         def base_url_hash
-          { :controller => '/refinery/categories', :action => 'show', :only_path => true }
+          { :controller => '/refinery/products/categories', :action => 'show', :only_path => true }
         end
 
       end

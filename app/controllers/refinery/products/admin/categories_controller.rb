@@ -17,6 +17,38 @@ module Refinery
           render :layout => false
         end
 
+        def update
+          if @category.update_attributes(category_params)
+            flash.notice = t('refinery.crudify.updated', what: "'#{@category.title}'")
+
+            if from_dialog?
+              self.index
+              @dialog_successful = true
+              render :index
+            else
+              if params[:continue_editing] =~ /true|on|1/
+                if request.xhr?
+                  render partial: 'save_and_continue_callback',
+                         locals: save_and_continue_locals(@category)
+                else
+                  redirect_to :back
+                end
+              else
+                redirect_back_or_default(refinery.admin_products_path)
+              end
+            end
+          else
+            if request.xhr?
+              render :partial => '/refinery/admin/error_messages', :locals => {
+                :object => @category,
+                :include_object_name => true
+              }
+            else
+              render 'edit'
+            end
+          end
+        end
+
         protected
           def after_update_positions
             find_all_categories
@@ -43,12 +75,12 @@ module Refinery
 
         protected
           def after_update_positions
-            find_all_pages
+            find_all_categories
             render :partial => '/refinery/admin/pages/sortable_list' and return
           end
 
           def category_params
-            params.require(:category).permit(:title, :photo_id, :parent_id, :promote)
+            params.require(:category).permit(:title, :link_url, :photo_id, :parent_id, :promote)
           end
 
           def new_category_params

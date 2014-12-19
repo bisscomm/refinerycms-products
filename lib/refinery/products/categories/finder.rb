@@ -35,7 +35,7 @@ module Refinery
           translations_conditions = translations_conditions(globalized_conditions)
 
           # A join implies readonly which we don't really want.
-          ::Refinery::Products::Category.where(globalized_conditions).
+          Refinery::Products::Category.where(globalized_conditions).
                joins(:translations).
                where(translations_conditions).
                readonly(false)
@@ -45,14 +45,14 @@ module Refinery
         attr_accessor :conditions
 
         def translated_attributes
-          ::Refinery::Products::Category.translated_attribute_names.map(&:to_s) | %w(locale)
+          Refinery::Products::Category.translated_attribute_names.map(&:to_s) | %w(locale)
         end
 
         def translations_conditions(original_conditions)
           translations_conditions = {}
           original_conditions.keys.each do |key|
             if translated_attributes.include? key.to_s
-              translations_conditions["#{::Refinery::Products::Category.translation_class.table_name}.#{key}"] = original_conditions.delete(key)
+              translations_conditions["#{Refinery::Products::Category.translation_class.table_name}.#{key}"] = original_conditions.delete(key)
             end
           end
           translations_conditions
@@ -97,52 +97,52 @@ module Refinery
         end
 
         def find
-          # if slugs_scoped_by_parent?
-          #   FinderByScopedPath.new(path).find
-          # else
+          if slugs_scoped_by_parent?
+            FinderByScopedPath.new(path).find
+          else
             FinderByUnscopedPath.new(path).find
-          # end
+          end
         end
 
         private
         attr_accessor :path
 
-        # def slugs_scoped_by_parent?
-        #   ::Refinery::Products::Categories.scope_slug_by_parent
-        # end
+        def slugs_scoped_by_parent?
+          ::Refinery::Pages.scope_slug_by_parent
+        end
 
         def by_slug(slug_path, conditions = {})
           Finder.by_slug(slug_path, conditions)
         end
       end
 
-      # class FinderByScopedPath < FinderByPath
-      #   def find
-      #     # With slugs scoped to the parent category we need to find a category by its full path.
-      #     # For example with about/example we would need to find 'about' and then its child
-      #     # called 'example' otherwise it may clash with another category called /example.
-      #     category = parent_category
-      #     while category && path_segments.any? do
-      #       category = next_category(category)
-      #     end
-      #     category
-      #   end
+      class FinderByScopedPath < FinderByPath
+        def find
+          # With slugs scoped to the parent category we need to find a category by its full path.
+          # For example with about/example we would need to find 'about' and then its child
+          # called 'example' otherwise it may clash with another category called /example.
+          category = parent_category
+          while category && path_segments.any? do
+            category = next_category(category)
+          end
+          category
+        end
 
-      #   private
+        private
 
-      #   def path_segments
-      #     @path_segments ||= path.split('/').select(&:present?)
-      #   end
+        def path_segments
+          @path_segments ||= path.split('/').select(&:present?)
+        end
 
-      #   def parent_category
-      #     by_slug(path_segments.shift, :parent_id => nil).first
-      #   end
+        def parent_category
+          by_slug(path_segments.shift, :parent_id => nil).first
+        end
 
-      #   def next_category(category)
-      #     slug_or_id = path_segments.shift
-      #     category.children.by_slug(slug_or_id).first || category.children.find(slug_or_id)
-      #   end
-      # end
+        def next_category(category)
+          slug_or_id = path_segments.shift
+          category.children.by_slug(slug_or_id).first || category.children.find(slug_or_id)
+        end
+      end
 
       class FinderByUnscopedPath < FinderByPath
         def find
@@ -159,12 +159,12 @@ module Refinery
         def find
           if path.present?
             if path.friendly_id?
-              ::Refinery::Products::Category.friendly.find_by_path(path)
+              Refinery::Products::Category.friendly.find_by_path(path)
             else
-              ::Refinery::Products::Category.friendly.find(path)
+              Refinery::Products::Category.friendly.find(path)
             end
           elsif id.present?
-            ::Refinery::Products::Category.friendly.find(id)
+            Refinery::Products::Category.friendly.find(id)
           end
         end
 
