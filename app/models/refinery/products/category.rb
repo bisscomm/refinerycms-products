@@ -83,9 +83,9 @@ module Refinery
       class << self
         # Live pages are 'allowed' to be shown in the frontend of your website.
         # By default, this is all pages that are not set as 'draft'.
-        # def live
-        #   where(:draft => false)
-        # end
+        def live
+          where(:draft => false)
+        end
 
         # Find page by path, checking for scoping rules
         def find_by_path(path)
@@ -283,9 +283,9 @@ module Refinery
       end
 
       # Returns true if this page is "published"
-      # def live?
-      #   !draft?
-      # end
+      def live?
+        !draft?
+      end
 
       # Return true if this page can be shown in the navigation.
       # If it's a draft or is set to not show in the menu it will return false.
