@@ -1,4 +1,4 @@
-<li id="product_#{product.id}" class="product">
+<li id=<%= "product_#{product.id}" %> class="product">
   <div class="title">
     <h2><%= link_to product.title, refinery.products_product_path(product) %></h2>
   </div>
@@ -15,5 +15,5 @@
     <% end %>
   </div>
 
-  <%= link_to t('.read_more'), refinery.products_product_path(product) %>
+  <%= link_to t('.read_more'), refinery.products_product_path(product), class: 'read-more' %>
 </li>
