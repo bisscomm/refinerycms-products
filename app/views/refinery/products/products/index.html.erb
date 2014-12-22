@@ -1,13 +1,6 @@
 <% content_for :body do %>
   <ul id="products">
-    <% @products.each do |product| %>
-      <li>
-        <%= link_to refinery.products_product_path(product) do %>
-          <%= image_tag(product.images.first.thumbnail(geometry: "200x200#c").url) unless product.images.first.nil? %>
-          <h2><%= product.title %></h2>
-        <% end %>
-      </li>
-    <% end %>
+    <%= render :partial => '/refinery/products/shared/product', :collection => @products %>
   </ul>
 <% end %>
 
