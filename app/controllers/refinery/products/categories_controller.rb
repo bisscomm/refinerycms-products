@@ -4,7 +4,8 @@ module Refinery
       # include Pages::RenderOptions
       include Refinery::Products::ControllerHelper
 
-      before_action :find_page, :set_canonical
+      # before_action :find_category, :set_canonical
+      before_action :find_category
       # before_action :error_404, :unless => :current_user_can_view_page?
 
       # Save whole Page after delivery
@@ -96,9 +97,9 @@ module Refinery
       # alias_method :page, :find_page
       alias_method :category, :find_category
 
-      def set_canonical
-        @canonical = refinery.url_for @category.canonical if @category.present?
-      end
+      # def set_canonical
+      #   @canonical = refinery.url_for @category.canonical if @category.present?
+      # end
 
       # def write_cache?
       #   if Refinery::Pages.cache_pages_full && !refinery_user?
