@@ -9,11 +9,18 @@
     <% end %>
   </div>
 
-  <div class="properties">
-    <% product.propertizations.each do |property| %>
-      <%= Refinery::Products::Property.find_by(id: property.products_property_id).title %> : <%= property.value  %>
-    <% end %>
+  <div class="sub-category">
+    <%= product.categories.select{ |c| c.leaf? }.first.title %>
   </div>
+
+  <ul class="properties">
+    <% product.propertizations.each do |property| %>
+      <li>
+        <span class="title"><%= Refinery::Products::Property.find_by(id: property.products_property_id).title %></span>
+        <span class="value"><%= property.value  %></span>
+      </li>
+    <% end %>
+  </ul>
 
   <%= link_to t('.read_more'), refinery.products_product_path(product), class: 'read-more' %>
 </li>

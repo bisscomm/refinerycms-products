@@ -3,23 +3,21 @@
 <% end %>
 
 <% content_for :body do %>
-  <section>
-    <% if !@product_images.empty? %>
-      <h2>Images</h2>
-      <ul id='gallery'>
-        <% @product_images.each do |image| %>
-          <li>
-            <%= link_to image_tag(image.thumbnail(geometry: "200x200#c").url),
-                        image.thumbnail(geometry: "900x600").url %>
-          </li>
-        <% end %>
-      </ul>
-    <% end %>
+  <% if !@product_images.empty? %>
+    <h2>Images</h2>
+    <ul id='gallery'>
+      <% @product_images.each do |image| %>
+        <li>
+          <%= link_to image_tag(image.thumbnail(geometry: "200x200#c").url),
+                      image.thumbnail(geometry: "900x600").url %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 
-    <%=raw @product.body %>
+  <%=raw @product.body %>
 
-    <%= link_to t('.back_to'), :back %>
-  </section>
+  <%= link_to t('.back_to'), :back %>
 <% end %>
 
 <% content_for :side_body do %>
@@ -29,7 +27,7 @@
         <%= @root_category.title %>
       <% end %>
     </h3>
-    <ul id="products">
+    <ul id="categories">
       <% @root_category_products.each do |product| %>
         <li>
           <%= link_to product.title, refinery.products_product_path(product) %>
