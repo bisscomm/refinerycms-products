@@ -2,17 +2,11 @@ Refinery::Core::Engine.routes.draw do
 
   # Frontend routes
   namespace :products, :path => Refinery::Products.shop_path do
-    # root :to => "products#index"
-
     root to: "products#index", via: :get
-    get '/categories/:id', to: 'categories#show', as: :category
+    get '/categories/*path', to: 'categories#show', as: :category
 
     scope :path => Refinery::Products.products_path do
       resources :products, :path => '', :as => :products, :controller => 'products'
-    end
-
-    scope :path => Refinery::Products.products_categories_path do
-      resources :categories, :path => '', :as => :categories, :controller => 'categories'
     end
   end
 
