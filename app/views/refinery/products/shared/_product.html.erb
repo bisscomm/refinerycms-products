@@ -1,10 +1,10 @@
 <li id=<%= "product_#{product.id}" %> class="product">
   <div class="title">
-    <h2><%= link_to product.title, refinery.products_product_path(product) %></h2>
+    <h2><%= link_to product.title, refinery.products_product_path(product, referer: refinery.products_category_path(@category)) %></h2>
   </div>
 
   <div class="image">
-    <%= link_to refinery.products_product_path(product) do %>
+    <%= link_to refinery.products_product_path(product, referer: refinery.products_category_path(@category)) do %>
       <%= image_fu product.images.first, '242x200#c' %>
     <% end %>
   </div>
@@ -22,5 +22,5 @@
     <% end %>
   </ul>
 
-  <%= link_to t('.read_more'), refinery.products_product_path(product), class: 'read-more' %>
+  <%= link_to t('.read_more'), refinery.products_product_path(product, referer: refinery.products_category_path(@category)), class: 'read-more' %>
 </li>

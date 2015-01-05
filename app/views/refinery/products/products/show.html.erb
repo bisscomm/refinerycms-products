@@ -30,7 +30,7 @@
     <ul id="categories">
       <% @root_category_products.each do |product| %>
         <li>
-          <%= link_to product.title, refinery.products_product_path(product) %>
+          <%= link_to product.title, refinery.products_product_path(product, referer: refinery.products_category_path(@root_category)) %>
         </li>
       <% end %>
     </ul>
