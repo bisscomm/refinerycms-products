@@ -6,8 +6,6 @@
       </li>
     <% end %>
   </ul>
-
-  <%= link_to t('.back_to'), refinery.products_root_path %>
 <% end %>
 
-<%= render '/refinery/content_page' %>
+<%= render '/refinery/content_page', :hide_sections => [:side_body, :body_content_title] %>

@@ -41,7 +41,7 @@ module Refinery
 
         # render_with_templates?
 
-        @products = @category.products.live.includes(:categories).with_globalize.page(params[:page])
+        @products = @category.products.live.includes(:categories).with_globalize.order('title ASC').page(params[:page])
       end
 
     protected

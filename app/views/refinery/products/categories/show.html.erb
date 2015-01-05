@@ -1,8 +1,7 @@
-<% content_for :body_content_title do %>
-  <%= @category.title %>
-<% end %>
+<% content_for :title, @category.title %>
 
 <% content_for :body do %>
+  <h1 class="visuallyhidden"><%= @category.title %></h1>
   <section>
     <% if @products.any? %>
       <ul id="products">
@@ -18,4 +17,4 @@
   </section>
 <% end %>
 
-<%= render '/refinery/content_page' %>
+<%= render '/refinery/content_page', :hide_sections => [:side_body, :body_content_title] %>

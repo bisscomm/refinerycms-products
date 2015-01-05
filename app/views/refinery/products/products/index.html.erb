@@ -4,14 +4,4 @@
   </ul>
 <% end %>
 
-<% content_for :side_body do %>
-  <ul id="categories">
-    <% @products_categories.each do |category| %>
-      <li>
-        <%= link_to category.title, refinery.products_category_path(category) %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%= render '/refinery/content_page' %>
+<%= render '/refinery/content_page', :hide_sections => [:side_body, :body_content_title] %>

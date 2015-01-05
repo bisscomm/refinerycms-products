@@ -1,3 +1,5 @@
+<% content_for :title, @product.title %>
+
 <% content_for :body do %>
   <h1><%= @product.title %></h1>
 
@@ -13,8 +15,6 @@
   <% end %>
 
   <%= raw @product.body %>
-
-  <%= link_to t('.back_to'), :back %>
 <% end %>
 
 <% content_for :side_body do %>
