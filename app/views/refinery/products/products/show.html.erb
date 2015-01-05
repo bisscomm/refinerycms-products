@@ -1,10 +1,7 @@
-<% content_for :body_content_title do %>
-  <%= @product.title %>
-<% end %>
-
 <% content_for :body do %>
+  <h1><%= @product.title %></h1>
+
   <% if !@product_images.empty? %>
-    <h2>Images</h2>
     <ul id='gallery'>
       <% @product_images.each do |image| %>
         <li>
@@ -15,26 +12,15 @@
     </ul>
   <% end %>
 
-  <%=raw @product.body %>
+  <%= raw @product.body %>
 
   <%= link_to t('.back_to'), :back %>
 <% end %>
 
 <% content_for :side_body do %>
   <aside>
-    <h3>
-      <%= link_to refinery.products_category_path(@root_category) do %>
-        <%= @root_category.title %>
-      <% end %>
-    </h3>
-    <ul id="categories">
-      <% @root_category_products.each do |product| %>
-        <li>
-          <%= link_to product.title, refinery.products_product_path(product, referer: refinery.products_category_path(@root_category)) %>
-        </li>
-      <% end %>
-    </ul>
+    <%= render :partial => '/refinery/products/shared/products_fast_nav' %>
   </aside>
 <% end %>
 
-<%= render '/refinery/content_page' %>
+<%= render '/refinery/content_page', :hide_sections => [:body_content_title] %>
