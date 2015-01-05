@@ -62,7 +62,8 @@ module Refinery
       # end
 
       def should_redirect_to_friendly_url?
-        requested_friendly_id != category.friendly_id || ::Refinery::Pages.scope_slug_by_parent && params[:path].present? && params[:path].match(page.root.slug).nil?
+        # requested_friendly_id != page.friendly_id || ::Refinery::Pages.scope_slug_by_parent && params[:path].present? && params[:path].match(page.root.slug).nil?
+        requested_friendly_id != category.friendly_id || ::Refinery::Pages.scope_slug_by_parent && params[:path].present? && params[:path].match(category.root.slug).nil?
       end
 
       # def current_user_can_view_page?
