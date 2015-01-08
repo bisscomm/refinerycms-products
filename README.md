@@ -23,7 +23,7 @@ This version of `refinerycms-products` supports Refinery 3.x and Rails 4.1.x.
 Open up your ``Gemfile`` and add at the bottom this line:
 
 ```ruby
-gem 'refinerycms-products', git: 'https://github.com/bisscomm/refinerycms-products', branch: 'master'
+gem 'refinerycms-products', github: 'bisscomm/refinerycms-products', branch: 'master'
 ```
 
 Now, run ``bundle install``
