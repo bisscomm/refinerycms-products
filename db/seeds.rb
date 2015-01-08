@@ -12,7 +12,7 @@ Refinery::I18n.frontend_locales.each do |lang|
       shop_page = ::Refinery::Page.create({
         :title => "Shop",
         :link_url => Refinery::Products.shop_path,
-        :menu_match => "^(/products.*)|#{Refinery::Products.shop_path}$",
+        :menu_match => "^(/shop.*)|#{Refinery::Products.shop_path}$",
         :deletable => false
       })
       shop_page.parts.create({
