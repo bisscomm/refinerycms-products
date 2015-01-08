@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.description       = 'Ruby on Rails Products extension for Refinery CMS'
   s.date              = '2014-10-22'
   s.summary           = 'Products extension for Refinery CMS'
-  s.email             = %q{info@bisscomm.com}
+  s.email             = %q{support@bisscomm.com}
   s.homepage          = %q{http://www.bisscomm.com}
   s.authors           = ['Brice Sanchez']
   s.license           = %q{MIT}
