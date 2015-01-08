@@ -90,7 +90,7 @@ module Refinery
         # Find page by path, checking for scoping rules
         def find_by_path(path)
           # Pages::Finder.by_path(path)
-          ::Refinery::Products::Categories::Finder.by_path(path)
+          Products::Categories::Finder.by_path(path)
         end
 
         # Helps to resolve the situation where you have a path and an id
@@ -98,7 +98,7 @@ module Refinery
         # than find_by_path.
         def find_by_path_or_id(path, id)
           # Pages::Finder.by_path_or_id(path, id)
-          Refinery::Products::Categories::Finder.by_path_or_id(path, id)
+          Products::Categories::Finder.by_path_or_id(path, id)
         end
 
         # Helps to resolve the situation where you have a path and an id
@@ -126,7 +126,7 @@ module Refinery
         # and then join to the pages table again to return the associated record.
         def by_title(title)
           # Pages::Finder.by_title(title)
-          ::Refinery::Products::Categories::Finder.by_title(title)
+          Products::Categories::Finder.by_title(title)
         end
 
         # Finds pages by their slug.  This method is necessary because pages
@@ -135,7 +135,7 @@ module Refinery
         # and then join to the pages table again to return the associated record.
         def by_slug(slug, conditions = {})
           # Pages::Finder.by_slug(slug, conditions)
-          ::Refinery::Products::Categories::Finder.by_slug(slug, conditions)
+          Products::Categories::Finder.by_slug(slug, conditions)
         end
 
         # Shows all pages with :show_in_menu set to true, but it also
@@ -154,7 +154,7 @@ module Refinery
         # Wrap up the logic of finding the pages based on the translations table.
         def with_globalize(conditions = {})
           # Pages::Finder.with_globalize(conditions)
-          ::Refinery::Products::Categories::Finder.with_globalize(conditions)
+          Products::Categories::Finder.with_globalize(conditions)
         end
 
         # Returns how many pages per page should there be when paginating pages
