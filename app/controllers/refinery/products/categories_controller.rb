@@ -89,6 +89,8 @@ module Refinery
       # end
       def find_category(fallback_to_404 = true)
         @category ||= case action_name
+                  when "index"
+                    Refinery::Page.find_by(:link_url => "#{Refinery::Products.shop_path}#{Refinery::Products.products_categories_path}")
                   when "show"
                     Refinery::Products::Category.find_by_path_or_id(params[:path], params[:id])
                   end
