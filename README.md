@@ -3,13 +3,13 @@
 Products engine for [Refinery CMS](http://refinerycms.com) allows you to display translated products.
 
 ### In summary you can:
-* Manage products (with images, file, properties)
-* Manage product properties (with custom value)
-* Manage product categories (with images and promote option)
+* Manage products (with image gallery, file attachement, properties, categories)
+* Manage product properties (with custom value and reorganization)
+* Manage product categories (with nested categorization, image, promote option amd reorganization)
 
 ### Steps before version 1.0 ###
-* Add nested categorization for products (Work in Progress, help appreciated)
-* Rename this engine for refinerycms-catalog
+* Testing,
+* Clean up code (Work in Progress, help appreciated).
 
 ## Requirements
 
