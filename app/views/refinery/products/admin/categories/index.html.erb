@@ -1,6 +1,4 @@
-<%= render '/refinery/products/admin/submenu' %>
-<%= render 'refinery/admin/search_header', :url => request.path %>
-<div id='records' class='tree'>
+<section id='records' class='tree'>
   <% if @categories.any? %>
     <%= render "sortable_list" %>
   <% else %>
@@ -14,6 +12,10 @@
       </p>
     <% end %>
   <% end %>
-</div>
+</section>
+
+<section id='actions'>
+  <%= render 'actions' %>
+</section>
 
 <%= render '/refinery/admin/make_sortable', options: {tree: true, replaceContentsAfterUpdate: true} if @categories.many? -%>

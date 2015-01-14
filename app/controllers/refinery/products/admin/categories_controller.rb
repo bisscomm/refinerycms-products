@@ -52,7 +52,7 @@ module Refinery
         protected
           def after_update_positions
             find_all_categories
-            render :partial => '/refinery/admin/categories/sortable_list' and return
+            render :partial => '/refinery/products/admin/categories/sortable_list' and return
           end
 
           def find_category
@@ -71,12 +71,6 @@ module Refinery
             else
               Globalize.locale = Refinery::I18n.default_frontend_locale
             end
-          end
-
-        protected
-          def after_update_positions
-            find_all_categories
-            render :partial => '/refinery/admin/pages/sortable_list' and return
           end
 
           def category_params

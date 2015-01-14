@@ -1,23 +1,25 @@
 <li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(property) -%>">
-  <span class='title'>
-    <%= property.title.presence || property.translations.detect {|t| t.title.present?}.title %>
-    <span class="preview">
-      <% property.translations.each do |translation| %>
-        <% if translation.title.present? %>
-          <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
-              refinery.edit_products_admin_property_path(property, :switch_locale => translation.locale),
-              :class => 'locale' %>
-          <% end %>
-      <% end %>
+  <div class='clearfix'>
+    <span class='title'>
+      <%= property.title.presence || property.translations.detect {|t| t.title.present?}.title %>
+      <span class="preview">
+        <% property.translations.each do |translation| %>
+          <% if translation.title.present? %>
+            <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
+                refinery.edit_products_admin_property_path(property, :switch_locale => translation.locale),
+                :class => 'locale' %>
+            <% end %>
+        <% end %>
+      </span>
     </span>
-  </span>
-  <span class='actions'>
-    <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_products_admin_property_path(property),
-         :title => t('.edit') %>
-    <%= link_to refinery_icon_tag("delete.png"), refinery.products_admin_property_path(property),
-        :class => "cancel confirm-delete",
-        :title => t('.delete'),
-        :data => {:confirm => t('message', :scope => 'refinery.admin.delete', :title => property.title)},
-        :method => :delete %>
-  </span>
+    <span class='actions'>
+      <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_products_admin_property_path(property),
+           :title => t('.edit') %>
+      <%= link_to refinery_icon_tag("delete.png"), refinery.products_admin_property_path(property),
+          :class => "cancel confirm-delete",
+          :title => t('.delete'),
+          :data => {:confirm => t('message', :scope => 'refinery.admin.delete', :title => property.title)},
+          :method => :delete %>
+    </span>
+  </div>
 </li>

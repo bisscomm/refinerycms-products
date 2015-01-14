@@ -1,6 +1,4 @@
-<%= render '/refinery/products/admin/submenu' %>
-<%= render 'refinery/admin/search_header', :url => request.path %>
-<div id='records'>
+<section id='records'>
   <% if @products.any? %>
     <%= will_paginate @products %>
 
@@ -18,4 +16,8 @@
       </p>
     <% end %>
   <% end %>
-</div>
+</section>
+
+<section id='actions'>
+  <%= render 'actions' %>
+</section>

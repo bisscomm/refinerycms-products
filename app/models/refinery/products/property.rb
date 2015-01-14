@@ -10,6 +10,8 @@ module Refinery
 
       acts_as_indexed :fields => [:title]
 
+      default_scope { order(position: :asc) }
+
       def self.translated
         with_translations(::Globalize.locale)
       end

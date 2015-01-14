@@ -1,0 +1,16 @@
+<%= render '/refinery/products/admin/submenu' %>
+
+<% if @categories.many? and !searching? %>
+  <ul>
+    <li>
+      <%= link_to t('.reorder_categories'), refinery.products_admin_categories_path,
+                  :id => "reorder_action",
+                  :class => "reorder_icon" %>
+
+      <%= link_to t('.reorder_categories_done'), refinery.products_admin_categories_path,
+                  :id => "reorder_action_done",
+                  :style => "display: none;",
+                  :class => "reorder_icon" %>
+    </li>
+  </ul>
+<% end %>

@@ -1,58 +1,56 @@
-<nav id='actions' class='multilist'>
-  <ul class='search_list'>
-    <li class='not_a_link'>
-      <%= render "/refinery/admin/search", :url => request.path %>
-    </li>
-  </ul>
+<ul class='search_list'>
+  <li class='not_a_link'>
+    <%= render "/refinery/admin/search", :url => request.path %>
+  </li>
+</ul>
 
-  <ul class='collapsible_menu'>
-    <li class='not_a_link'>
-      <%= link_to t('.products.title'), '#',
-                   :class => 'page_copy_icon' %>
-    </li>
-    <li>
-      <%= link_to t('.products.manage'), refinery.products_admin_products_path,
-                   :class => 'page_icon' %>
-    </li>
-    <li>
-      <%= link_to t('.products.uncategorized'), refinery.uncategorized_products_admin_products_path,
-                  :class => 'page_icon' %>
-    </li>
-    <li>
-       <%= link_to t('.products.new'), refinery.new_products_admin_product_path,
-                   :class => 'page_add_icon' %>
-    </li>
-  </ul>
+<ul class='collapsible_menu'>
+  <li class='not_a_link'>
+    <%= link_to t('.products.title'), '#',
+                 :class => 'page_copy_icon' %>
+  </li>
+  <li>
+    <%= link_to t('.products.manage'), refinery.products_admin_products_path,
+                 :class => 'page_icon' %>
+  </li>
+  <li>
+    <%= link_to t('.products.uncategorized'), refinery.uncategorized_products_admin_products_path,
+                :class => 'page_icon' %>
+  </li>
+  <li>
+     <%= link_to t('.products.new'), refinery.new_products_admin_product_path,
+                 :class => 'page_add_icon' %>
+  </li>
+</ul>
 
-  <ul class='collapsible_menu'>
-    <li class='not_a_link'>
-      <%= link_to t('.categories.title'), '#',
-                  :class => 'folder_icon' %>
-    </li>
-    <li>
-      <%= link_to t('.categories.manage'), refinery.products_admin_categories_path,
-                  :class => 'folder_edit_icon' %>
-    </li>
-    <li>
-      <%= link_to t('.categories.new'), refinery.new_products_admin_category_path,
-                  :class => 'folder_add_icon' %>
-    </li>
-  </ul>
+<ul class='collapsible_menu'>
+  <li class='not_a_link'>
+    <%= link_to t('.categories.title'), '#',
+                :class => 'folder_icon' %>
+  </li>
+  <li>
+    <%= link_to t('.categories.manage'), refinery.products_admin_categories_path,
+                :class => 'folder_edit_icon' %>
+  </li>
+  <li>
+    <%= link_to t('.categories.new'), refinery.new_products_admin_category_path,
+                :class => 'folder_add_icon' %>
+  </li>
+</ul>
 
-  <ul class='collapsible_menu'>
-    <li class='not_a_link'>
-      <%= link_to t('.properties.title'), '#',
-                  :class => 'folder_icon' %>
-    </li>
-    <li>
-      <%= link_to t('.properties.manage'), refinery.products_admin_properties_path,
-                  :class => 'folder_edit_icon' %>
-    </li>
-    <li>
-      <%= link_to t('.properties.new'), refinery.new_products_admin_property_path,
-                  :class => 'folder_add_icon' %>
-    </li>
-  </ul>
-</nav>
+<ul class='collapsible_menu'>
+  <li class='not_a_link'>
+    <%= link_to t('.properties.title'), '#',
+                :class => 'folder_icon' %>
+  </li>
+  <li>
+    <%= link_to t('.properties.manage'), refinery.products_admin_properties_path,
+                :class => 'folder_edit_icon' %>
+  </li>
+  <li>
+    <%= link_to t('.properties.new'), refinery.new_products_admin_property_path,
+                :class => 'folder_add_icon' %>
+  </li>
+</ul>
 
 <% content_for :stylesheets, stylesheet_link_tag('refinery/products/backend') %>
