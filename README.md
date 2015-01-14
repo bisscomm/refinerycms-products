@@ -8,6 +8,7 @@ Products engine for [Refinery CMS](http://refinerycms.com) allows you to display
 * Manage product categories (with nested categorization, image, promote option amd reorganization)
 
 ### Steps before version 1.0 ###
+* Add locales,
 * Testing,
 * Clean up code (Work in Progress, help appreciated).
 
