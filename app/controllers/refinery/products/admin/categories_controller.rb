@@ -74,7 +74,7 @@ module Refinery
           end
 
           def category_params
-            params.require(:category).permit(:title, :link_url, :photo_id, :parent_id, :promote)
+            params.require(:category).permit(:title, :body, :link_url, :photo_id, :parent_id, :promote)
           end
 
           def new_category_params
