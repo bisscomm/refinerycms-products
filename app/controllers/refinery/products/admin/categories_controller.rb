@@ -34,7 +34,7 @@ module Refinery
                   redirect_to :back
                 end
               else
-                redirect_back_or_default(refinery.admin_products_category_path)
+                redirect_back_or_default(refinery.products_admin_categories_path)
               end
             end
           else
