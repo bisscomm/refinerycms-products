@@ -45,7 +45,7 @@ Finally seed your database and you're done.
 
 Enable page images for this engine in your initializer file
 
-```
+```ruby
 # config/initializers/refinery/page_images.rb
   config.enable_for = [
     {:model=>"Refinery::Page", :tab=>"Refinery::Pages::Tab"},
