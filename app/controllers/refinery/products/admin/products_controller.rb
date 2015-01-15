@@ -22,6 +22,7 @@ module Refinery
           def product_params
             params.require(:product).permit(
               :title,
+              :sku,
               :body,
               :published_at,
               :draft,
