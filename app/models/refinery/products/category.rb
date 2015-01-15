@@ -9,16 +9,7 @@ module Refinery
     class Category < Refinery::Core::BaseModel
       extend FriendlyId
 
-      # translates :title, :menu_title, :custom_slug, :slug, :include => :seo_meta
       translates :title, :slug
-
-      # class Translation
-      #   is_seo_meta
-
-      #   def self.seo_fields
-      #     ::SeoMeta.attributes.keys.map{ |a| [a, :"#{a}="]}.flatten
-      #   end
-      # end
 
       class FriendlyIdOptions
         def self.reserved_words
@@ -31,10 +22,10 @@ module Refinery
             use: [:reserved],
             reserved_words: self.reserved_words
           }
-          # if ::Refinery::Pages.scope_slug_by_parent
-            friendly_id_options[:use] << :scoped
-            friendly_id_options.merge!(scope: :parent)
-          # end
+
+          friendly_id_options[:use] << :scoped
+          friendly_id_options.merge!(scope: :parent)
+
           friendly_id_options[:use] << :globalize
           friendly_id_options
         end
@@ -42,31 +33,16 @@ module Refinery
 
       # If title changes tell friendly_id to regenerate slug when saving record
       def should_generate_new_friendly_id?
-        # changes.keys.include?("title") || changes.keys.include?("custom_slug")
         changes.keys.include?("title")
       end
 
-      # Delegate SEO Attributes to globalize translation
-      # delegate(*(Translation.seo_fields << {:to => :translation}))
-
       validates :title, :presence => true
-
-      # validates :custom_slug, :uniqueness => true, :allow_blank => true
 
       # Docs for acts_as_nested_set https://github.com/collectiveidea/awesome_nested_set
       # rather than :delete_all we want :destroy
       acts_as_nested_set :dependent => :destroy
 
       friendly_id :custom_slug_or_title, FriendlyIdOptions.options
-
-      # has_many :parts, -> {
-      #   scope = order('position ASC')
-      #   scope = scope.includes(:translations) if ::Refinery::PagePart.respond_to?(:translation_class)
-      #   scope
-      # },       :foreign_key => :refinery_page_id,
-      #          :class_name => '::Refinery::PagePart',
-      #          :inverse_of => :page,
-      #          :dependent => :destroy
 
       belongs_to :photo, :class_name => '::Refinery::Image'
 
@@ -75,21 +51,9 @@ module Refinery
 
       acts_as_indexed :fields => [:title]
 
-      # accepts_nested_attributes_for :parts, :allow_destroy => true
-
-      # before_destroy :deletable?
-      # after_save :reposition_parts!
-
       class << self
-        # Live pages are 'allowed' to be shown in the frontend of your website.
-        # By default, this is all pages that are not set as 'draft'.
-        def live
-          where(:draft => false)
-        end
-
-        # Find page by path, checking for scoping rules
+        # Find categories by path, checking for scoping rules
         def find_by_path(path)
-          # Pages::Finder.by_path(path)
           Products::Categories::Finder.by_path(path)
         end
 
@@ -97,7 +61,6 @@ module Refinery
         # and if the path is unfriendly then a different finder method is required
         # than find_by_path.
         def find_by_path_or_id(path, id)
-          # Pages::Finder.by_path_or_id(path, id)
           Products::Categories::Finder.by_path_or_id(path, id)
         end
 
@@ -107,12 +70,6 @@ module Refinery
         #
         # raise ActiveRecord::RecordNotFound if not found.
         def find_by_path_or_id!(path, id)
-          # page = find_by_path_or_id(path, id)
-
-          # raise ActiveRecord::RecordNotFound unless page
-
-          # page
-
           category = find_by_path_or_id(path, id)
 
           raise ActiveRecord::RecordNotFound unless category
@@ -120,47 +77,26 @@ module Refinery
           category
         end
 
-        # Finds pages by their title.  This method is necessary because pages
+        # Finds categories by their title.  This method is necessary because categories
         # are translated which means the title attribute does not exist on the
-        # pages table thus requiring us to find the attribute on the translations table
-        # and then join to the pages table again to return the associated record.
+        # categories table thus requiring us to find the attribute on the translations table
+        # and then join to the categories table again to return the associated record.
         def by_title(title)
-          # Pages::Finder.by_title(title)
           Products::Categories::Finder.by_title(title)
         end
 
-        # Finds pages by their slug.  This method is necessary because pages
+        # Finds categories by their slug.  This method is necessary because categories
         # are translated which means the slug attribute does not exist on the
-        # pages table thus requiring us to find the attribute on the translations table
-        # and then join to the pages table again to return the associated record.
+        # categories table thus requiring us to find the attribute on the translations table
+        # and then join to the categories table again to return the associated record.
         def by_slug(slug, conditions = {})
-          # Pages::Finder.by_slug(slug, conditions)
           Products::Categories::Finder.by_slug(slug, conditions)
         end
 
-        # Shows all pages with :show_in_menu set to true, but it also
-        # rejects any page that has not been translated to the current locale.
-        # This works using a query against the translated content first and then
-        # using all of the page_ids we further filter against this model's table.
-        # def in_menu
-        #   where(:show_in_menu => true).with_globalize
-        # end
-
-        # An optimised scope containing only live pages ordered for display in a menu.
-        # def fast_menu
-        #   live.in_menu.order(arel_table[:lft]).includes(:parent, :translations)
-        # end
-
-        # Wrap up the logic of finding the pages based on the translations table.
+        # Wrap up the logic of finding the categories based on the translations table.
         def with_globalize(conditions = {})
-          # Pages::Finder.with_globalize(conditions)
           Products::Categories::Finder.with_globalize(conditions)
         end
-
-        # Returns how many pages per page should there be when paginating pages
-        # def per_page(dialog = false)
-        #   dialog ? Pages.pages_per_dialog : Pages.pages_per_admin_index
-        # end
 
         def rebuild_with_slug_nullification!
           rebuild_without_slug_nullification!
@@ -174,10 +110,6 @@ module Refinery
           t_slug = translation_class.arel_table[:slug]
           joins(:translations).group(:locale, :parent_id, t_slug).having(t_slug.count.gt(1)).count.
           each do |(locale, parent_id, slug), count|
-            # by_slug(slug, :locale => locale).where(:parent_id => parent_id).drop(1).each do |page|
-            #   page.slug = nil # kill the duplicate slug
-            #   page.save # regenerate the slug
-            # end
             by_slug(slug, :locale => locale).where(:parent_id => parent_id).drop(1).each do |category|
               category.slug = nil # kill the duplicate slug
               category.save # regenerate the slug
@@ -190,14 +122,14 @@ module Refinery
         persisted? && translations.any?{ |t| t.locale == Refinery::I18n.default_frontend_locale}
       end
 
-      # The canonical page for this particular page.
+      # The canonical category for this particular category.
       # Consists of:
       #   * The default locale's translated slug
       def canonical
         Globalize.with_locale(::Refinery::I18n.default_frontend_locale) { url }
       end
 
-      # The canonical slug for this particular page.
+      # The canonical slug for this particular category.
       # This is the slug for the default frontend locale.
       def canonical_slug
         Globalize.with_locale(::Refinery::I18n.default_frontend_locale) { slug }
@@ -206,45 +138,11 @@ module Refinery
       # Returns in cascading order: custom_slug or menu_title or title depending on
       # which attribute is first found to be present for this page.
       def custom_slug_or_title
-        # (Refinery::Pages.use_custom_slugs && custom_slug.presence) ||
-        #   menu_title.presence || title.presence
         title.presence
       end
 
-      # Am I allowed to delete this page?
-      # If a link_url is set we don't want to break the link so we don't allow them to delete
-      # If deletable is set to false then we don't allow this page to be deleted. These are often Refinery system pages
-      # def deletable?
-      #   deletable && link_url.blank? && menu_match.blank?
-      # end
-
-      # Repositions the child page_parts that belong to this page.
-      # This ensures that they are in the correct 0,1,2,3,4... etc order.
-      # def reposition_parts!
-      #   reload.parts.each_with_index do |part, index|
-      #     part.update_columns position: index
-      #   end
-      # end
-
-      # Before destroying a page we check to see if it's a deletable page or not
-      # Refinery system pages are not deletable.
-      # def destroy
-      #   return super if deletable?
-
-      #   puts_destroy_help
-
-      #   false
-      # end
-
-      # If you want to destroy a page that is set to be not deletable this is the way to do it.
-      # def destroy!
-      #   self.update_attributes(:menu_match => nil, :link_url => nil, :deletable => true)
-
-      #   self.destroy
-      # end
-
-      # Returns the full path to this page.
-      # This automatically prints out this page title and all parent page titles.
+      # Returns the full path to this category.
+      # This automatically prints out this category title and all parent category titles.
       # The result is joined by the path_separator argument.
       def path(path_separator: ' - ', ancestors_first: true)
         return title if root?
@@ -259,7 +157,6 @@ module Refinery
 
       def nested_url
         Globalize.with_locale(slug_locale) do
-          # if ::Refinery::Pages.scope_slug_by_parent && !root?
           if !root?
             self_and_ancestors.includes(:translations).map(&:to_param)
           else
@@ -269,8 +166,8 @@ module Refinery
       end
 
       # Returns an array with all ancestors to_param, allow with its own
-      # Ex: with an About page and a Mission underneath,
-      # ::Refinery::Page.find('mission').nested_url would return:
+      # Ex: with an About category and a Mission underneath,
+      # ::Refinery::Products::Category.find('mission').nested_url would return:
       #
       #   ['about', 'mission']
       #
@@ -281,26 +178,6 @@ module Refinery
       def nested_path
         ['', nested_url].join('/')
       end
-
-      # Returns true if this page is "published"
-      def live?
-        !draft?
-      end
-
-      # Return true if this page can be shown in the navigation.
-      # If it's a draft or is set to not show in the menu it will return false.
-      # def in_menu?
-      #   live? && show_in_menu?
-      # end
-
-      # def not_in_menu?
-      #   !in_menu?
-      # end
-
-      # Returns all visible sibling pages that can be rendered for the menu
-      # def shown_siblings
-      #   siblings.reject(&:not_in_menu?)
-      # end
 
       def to_refinery_menu_item
         {
@@ -316,41 +193,6 @@ module Refinery
           :url => url
         }
       end
-
-      # Accessor method to get a page part from a page.
-      # Example:
-      #
-      #    ::Refinery::Page.first.content_for(:body)
-      #
-      # Will return the body page part of the first page.
-      # def content_for(part_title)
-      #   part_with_title(part_title).try(:body)
-      # end
-
-      # Accessor method to test whether a page part
-      # exists and has content for this page.
-      # Example:
-      #
-      #   ::Refinery::Page.first.content_for?(:body)
-      #
-      # Will return true if the page has a body page part and it is not blank.
-      # def content_for?(part_title)
-      #   content_for(part_title).present?
-      # end
-
-      # Accessor method to get a page part object from a page.
-      # Example:
-      #
-      #    ::Refinery::Page.first.part_with_title(:body)
-      #
-      # Will return the Refinery::PagePart object with that title using the first page.
-      # def part_with_title(part_title)
-      #   # self.parts is usually already eager loaded so we can now just grab
-      #   # the first element matching the title we specified.
-      #   self.parts.detect do |part|
-      #     part.title_matches?(part_title)
-      #   end
-      # end
 
       private
 
@@ -368,7 +210,6 @@ module Refinery
         def self.normalize_friendly_id_with_marketable_urls(slug_string)
           # If we are scoping by parent, no slashes are allowed. Otherwise, slug is
           # potentially a custom slug that contains a custom route to the page.
-          # if !Pages.scope_slug_by_parent && slug_string.include?('/')
           if slug_string.include?('/')
             self.normalize_friendly_id_path(slug_string)
           else
@@ -378,7 +219,6 @@ module Refinery
 
         def self.protected_slug_string(slug_string)
           sluggified = slug_string.to_slug.normalize!
-          # sluggified << "-page" if Pages.marketable_urls && FriendlyIdOptions.reserved_words.include?(sluggified)
           sluggified << "-category" if FriendlyIdOptions.reserved_words.include?(sluggified)
           sluggified
         end
@@ -394,13 +234,6 @@ module Refinery
         FriendlyIdPath.normalize_friendly_id_with_marketable_urls(slug_string)
       end
       alias_method_chain :normalize_friendly_id, :marketable_urls
-
-      # def puts_destroy_help
-      #   puts "This page is not deletable. Please use .destroy! if you really want it deleted "
-      #   puts "unset .link_url," if link_url.present?
-      #   puts "unset .menu_match," if menu_match.present?
-      #   puts "set .deletable to true" unless deletable
-      # end
 
       def slug_locale
         return Globalize.locale if translation_for(Globalize.locale).try(:slug).present?

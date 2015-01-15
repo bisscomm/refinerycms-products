@@ -2,24 +2,6 @@ module Refinery
   module Products
     module Categories
       class Url
-
-        # class Localised < Url
-        #   def self.handle?(category)
-        #     category.link_url.present?
-        #   end
-
-        #   def url
-        #     current_url = category.link_url
-
-        #     if current_url =~ %r{^/} &&
-        #       Refinery::I18n.current_frontend_locale != Refinery::I18n.default_frontend_locale
-        #       current_url = "/#{Refinery::I18n.current_frontend_locale}#{current_url}"
-        #     end
-
-        #     current_url
-        #   end
-        # end
-
         class Marketable < Url
           def self.handle?(category)
             Refinery::Pages.marketable_urls
@@ -43,7 +25,6 @@ module Refinery
         end
 
         def self.build(category)
-          # klass = [ Localised, Marketable, Normal ].detect { |d| d.handle?(category) } || self
           klass = [ Marketable, Normal ].detect { |d| d.handle?(category) } || self
           klass.new(category).url
         end

@@ -9,8 +9,7 @@ Products engine for [Refinery CMS](http://refinerycms.com) allows you to display
 
 ### Steps before version 1.0 ###
 * Add locales,
-* Testing,
-* Clean up code (Work in Progress, help appreciated).
+* Testing.
 
 ## Requirements
 
