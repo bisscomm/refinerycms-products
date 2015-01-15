@@ -5,7 +5,7 @@ module Refinery
 
       helper :'refinery/products/products'
 
-      before_filter :find_page, :find_all_root_products_categories
+      before_filter :find_page, :find_all_root_categories, :find_all_categories
 
       protected
 

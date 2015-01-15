@@ -18,16 +18,16 @@ module Refinery
           @products = Refinery::Products::Product.live.includes(:categories).with_globalize.newest_first.page(params[:page])
         end
 
-        def find_all_root_products_categories
-          @products_categories = Refinery::Products::Category.where(parent_id: nil).order(:lft)
+        def find_all_root_categories
+          @root_categories = Refinery::Products::Category.where(parent_id: nil).order(:lft)
+        end
+
+        def find_all_categories
+          @categories = Refinery::Products::Category.order(:lft)
         end
 
         def find_all_promoted_root_products_categories
           @promoted_products_categories = Refinery::Products::Category.where(parent_id: nil, promote: 1).order(:lft)
-        end
-
-        def find_all_products_properties
-          @categories = Refinery::Products::Property.all
         end
     end
   end
