@@ -1,0 +1,10 @@
+<%= nested_li(@categories) do |c| %>
+  <%= link_to c.title, refinery.products_category_path(c.nested_url) %>
+  <% if c.leaf?%>
+    <ul>
+      <% c.products.each do |p| %>
+        <li><%= link_to p.sku, refinery.products_product_path(p) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

@@ -3,6 +3,8 @@ module Refinery
     class ShopController < ::ApplicationController
       include Refinery::Products::ControllerHelper
 
+      helper :'refinery/products/products'
+
       before_filter :find_page, :find_all_root_products_categories
 
       protected
