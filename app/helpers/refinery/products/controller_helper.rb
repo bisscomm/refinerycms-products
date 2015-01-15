@@ -26,8 +26,8 @@ module Refinery
           @categories = Refinery::Products::Category.order(:lft)
         end
 
-        def find_all_promoted_root_products_categories
-          @promoted_products_categories = Refinery::Products::Category.where(parent_id: nil, promote: 1).order(:lft)
+        def find_all_promoted_root_categories
+          @promoted_root_categories = Refinery::Products::Category.where(parent_id: nil, promote: 1).order(:lft)
         end
     end
   end

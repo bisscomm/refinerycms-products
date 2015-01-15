@@ -1,0 +1,15 @@
+<ul>
+  <% promoted_root_categories.each do | category | %>
+    <li>
+      <%= link_to category.title, refinery.products_category_path(category) %>
+
+      <% unless category.products.empty? %>
+        <ul class="products">
+          <% category.products.each do | product | %>
+            <li><%= link_to product.title, refinery.products_product_path(product) %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
