@@ -26,9 +26,10 @@ module Refinery
               :body,
               :published_at,
               :draft,
+              :file_id,
               images_attributes: [:id, :caption],
               propertizations_attributes: [ :id, :product_id, :products_property_id, :value, :_destroy ],
-              :category_ids => []
+              category_ids: []
             )
           end
 
