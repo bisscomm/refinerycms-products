@@ -10,7 +10,7 @@
           <% end %>
       <% end %>
 
-      <%= product.published_at.try(:strftime, '%b %d, %Y') || 'draft' %>
+      <%= product.sku %>
 
       <% if product.draft? %>
         <span class="label notice"><%= t('refinery.products.admin.products.product.draft') %></span>
