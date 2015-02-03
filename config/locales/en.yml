@@ -8,7 +8,7 @@ en:
         submenu:
           categories:
             title: Categories
-            manage: Manage
+            manage: Manage categories
             new: Create new category
           products:
             title: Products
@@ -19,37 +19,53 @@ en:
             title: Properties
             manage: Manage properties
             new: Create new property
-            uncategorized: Uncategorized properties
-
-
         categories:
           actions:
-            create_new: Add New Category
-            reorder: Reorder Categories
-            reorder_done: Done Reordering Categories
+            create_new: Add new category
+            reorder_categories: Reorder Categories
+            reorder_categories_done: Done Reordering Categories
+          index:
+            no_items_yet: No categories yet.
           records:
             title: Categories
             sorry_no_results: Sorry! There are no results found.
-            no_items_yet: There are no Categories yet. Click "Add New Category" to
-              add your first category.
+            no_items_yet: There are no Categories yet. Click "Add New Category" to add your first category.
           category:
-            view_live_html: View this category live <br/><em>(opens in a new window)</em>
-            edit: Edit this category
             delete: Remove this category forever
+            edit: Edit this category
+            expand_collapse: Expand or collapse
+            new: Add new sub category
+        properties:
+          actions:
+            create_new: Add new property
+            reorder_properties: Reorder properties
+            reorder_properties_done: Done reordering properties
+          index:
+            no_items_yet: No properties yet.
+          records:
+            title: Properties
+            sorry_no_results: Sorry! There are no results found.
+            no_items_yet: There are no properties yet. Click "Add new property" to add your first property.
+          property:
+            delete: Remove this property forever
+            edit: Edit this property
         products:
           actions:
-            create_new: Add New Product
-            reorder: Reorder Products
-            reorder_done: Done Reordering Products
+            create_new: Add new product
+            reorder: Reorder products
+            reorder_done: Done reordering products
+          index:
+            no_items_yet: No products yet.
           records:
             title: Products
             sorry_no_results: Sorry! There are no results found.
-            no_items_yet: There are no Products yet. Click "Add New Product" to add
-              your first product.
+            no_items_yet: There are no products yet. Click "Add new product" to add your first product.
           product:
             view_live_html: View this product live <br/><em>(opens in a new window)</em>
             edit: Edit this product
             delete: Remove this product forever
+          uncategorized:
+            no_items_yet: No products yet.
       categories:
         show:
           other: Other Categories
@@ -65,8 +81,17 @@ en:
     attributes:
       refinery/products/category:
         title: Title
+        body: Body
+        photo: Photo
+        parent_category: Parent category
+        promote: Promote
       refinery/products/product:
         title: Title
-        body: Body
+        sku: SKU
+        content: Content
+        file: File
+        properties: Properties
+        categories: Categories
+        published_at: Published at
       refinery/products/property:
         title: Title

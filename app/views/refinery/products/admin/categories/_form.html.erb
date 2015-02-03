@@ -30,8 +30,7 @@
 
   <div class='field'>
     <span class='label_with_help'>
-      <%= f.label :parent_id, t('.parent_category') %>
-      <%= refinery_help_tag t('.parent_category_help') %>
+      <%= f.label :parent_id, t('parent_category', :scope => 'activerecord.attributes.refinery/products/category') %>
     </span>
     <%= f.select :parent_id, parent_id_nested_set_options(@category), :include_blank => true %>
   </div>

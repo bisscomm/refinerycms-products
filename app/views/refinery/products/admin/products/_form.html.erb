@@ -86,7 +86,7 @@
         <% end %>
       </ul>
 
-      <h3><%= t('.published_at') %></h3>
+      <h3><%= t('published_at', :scope => 'activerecord.attributes.refinery/products/product') %></h3>
       <%= f.datetime_select :published_at %>
     </div>
   </div>
