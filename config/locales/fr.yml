@@ -72,6 +72,9 @@ fr:
       products:
         show:
           other: Autres produits
+      shared:
+        product:
+          read_more: Lire plus à propos du %{product}
 
   activerecord:
     models:
