@@ -72,6 +72,9 @@ en:
       products:
         show:
           other: Other Products
+      shared:
+        product:
+          read_more: Read more about %{product}
 
   activerecord:
     models:
