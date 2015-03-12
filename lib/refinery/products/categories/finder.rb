@@ -134,8 +134,13 @@ module Refinery
           @path_segments ||= path.split('/').select(&:present?)
         end
 
-        def parent_category
-          by_slug(path_segments.shift, :parent_id => nil).first
+        def parent_page
+          parent_category_segment = path_segments.shift
+          if parent_category_segment.friendly_id?
+            by_slug(parent_category_segment, :parent_id => nil).first
+          else
+            Refinery::Products::Category.find(parent_category_segment)
+          end
         end
 
         def next_category(category)
@@ -159,7 +164,7 @@ module Refinery
         def find
           if path.present?
             if path.friendly_id?
-              Refinery::Products::Category.friendly.find_by_path(path)
+              FinderByPath.new(path).find
             else
               Refinery::Products::Category.friendly.find(path)
             end
