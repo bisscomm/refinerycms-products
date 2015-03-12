@@ -31,7 +31,7 @@ module Refinery
       # If title changes tell friendly_id to regenerate slug when
       # saving record
       def should_generate_new_friendly_id?
-        title_changed?
+        changes.keys.include?("title")
       end
 
       self.per_page = Refinery::Products.products_per_page
