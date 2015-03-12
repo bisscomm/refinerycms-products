@@ -134,7 +134,7 @@ module Refinery
           @path_segments ||= path.split('/').select(&:present?)
         end
 
-        def parent_page
+        def parent_category
           parent_category_segment = path_segments.shift
           if parent_category_segment.friendly_id?
             by_slug(parent_category_segment, :parent_id => nil).first
