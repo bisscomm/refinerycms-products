@@ -5,6 +5,7 @@ en:
         title: Products
     products:
       admin:
+        draft: Draft
         submenu:
           categories:
             title: Categories

@@ -5,6 +5,7 @@ fr:
         title: Produits
     products:
       admin:
+        draft: Brouillon
         submenu:
           categories:
             title: Catégories

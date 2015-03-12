@@ -15,7 +15,7 @@
       <%= product.sku %>
 
       <% if product.draft? %>
-        <span class="label notice"><%= t('refinery.products.admin.products.product.draft') %></span>
+        <span class="label notice"><%= t('draft', :scope => 'refinery.products.admin') %></span>
       <% else %>
         <%= product.published_at.strftime('%b %d, %Y') %>
       <% end %>
