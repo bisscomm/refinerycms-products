@@ -3,15 +3,18 @@
     <span class='title'>
       <%= property.title.presence || property.translations.detect {|t| t.title.present?}.title %>
       <span class="preview">
-        <% property.translations.each do |translation| %>
-          <% if translation.title.present? %>
-            <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
-                refinery.edit_products_admin_property_path(property, :switch_locale => translation.locale),
-                :class => 'locale' %>
-            <% end %>
+        <% property.translations.reject {|t| t.title.blank? }.each do |translation| %>
+          <%= link_to refinery.edit_products_admin_property_path(property, :switch_locale => translation.locale),
+                      :class => 'locale' do %>
+            <div class="locale_icon <%= translation.locale %>">
+              <%= refinery_icon_tag('locale-blue.svg', :size => '24x24') %>
+              <span class="code"><%= translation.locale.upcase %></span>
+            </div>
+          <% end %>
         <% end %>
       </span>
     </span>
+
     <span class='actions'>
       <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_products_admin_property_path(property),
            :title => t('.edit') %>

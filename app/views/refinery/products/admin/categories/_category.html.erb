@@ -6,18 +6,20 @@
       <span class="icon"></span>
     <% end %>
 
-    <span class='title <%= 'toggle' if category.children.present? %>'>
+    <span class='title'>
       <%= category.title.presence || category.translations.detect {|t| t.title.present?}.title %>
-    </span>
-    <% if Refinery::I18n.frontend_locales.many? %>
-      <span class='locales'>
-        <% category.translations.sort_by{|t| Refinery::I18n.frontend_locales.index(t.locale)}.each do |translation| %>
-          <%= link_to refinery_icon_tag("flags/#{translation.locale}.png", :size => '16x11'),
-                      refinery.edit_products_admin_category_path(category.nested_url, :switch_locale => translation.locale),
-                      :class => 'locale' if translation.title.present? %>
+      <span class="preview">
+        <% category.translations.reject {|t| t.title.blank? }.each do |translation| %>
+          <%= link_to refinery.edit_products_admin_category_path(category.nested_url, :switch_locale => translation.locale),
+                      :class => 'locale' do %>
+            <div class="locale_icon <%= translation.locale %>">
+              <%= refinery_icon_tag('locale-blue.svg', :size => '24x24') %>
+              <span class="code"><%= translation.locale.upcase %></span>
+            </div>
+          <% end %>
         <% end %>
       </span>
-    <% end %>
+    </span>
 
     <span class='actions'>
       <%= link_to refinery_icon_tag('page_add.png'),
