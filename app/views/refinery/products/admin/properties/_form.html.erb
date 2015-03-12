@@ -1,6 +1,6 @@
 <%= form_for [refinery, :products_admin, @property] do |f| -%>
   <%= render '/refinery/admin/error_messages',
-              :object => @property,
+              :object => f.object,
               :include_object_name => true %>
 
   <%= render '/refinery/admin/locale_picker',

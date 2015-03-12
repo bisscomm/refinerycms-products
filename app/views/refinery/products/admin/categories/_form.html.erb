@@ -2,7 +2,7 @@
              :url => (refinery.products_admin_category_path(@category.nested_url) if @category.persisted?) do |f| %>
 
   <%= render '/refinery/admin/error_messages',
-              :object => @category,
+              :object => f.object,
               :include_object_name => true %>
 
   <%= render '/refinery/admin/locale_picker',
