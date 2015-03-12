@@ -18,6 +18,8 @@ Gem::Specification.new do |s|
   s.add_dependency    'refinerycms-core',            '~> 3.0.0'
   s.add_dependency    'refinerycms-page-images',     '~> 3.0.0'
   s.add_dependency    'refinerycms-acts-as-indexed', '~> 2.0.0'
+  s.add_dependency    'friendly_id',                  '~> 5.1.0'
+  s.add_dependency    'globalize',                   ['>= 4.0.0', '< 5.2']
   s.add_dependency    'awesome_nested_set',          '~> 3.0.0'
 
   # Development dependencies (usually used for testing)
