@@ -34,6 +34,9 @@ module Refinery
           end
 
         protected
+          def find_product
+            @product = Refinery::Products::Product.find_by_slug_or_id(params[:id])
+          end
 
           def find_all_categories
             @categories = Refinery::Products::Category.all

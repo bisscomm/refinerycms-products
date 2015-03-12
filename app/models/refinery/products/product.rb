@@ -56,6 +56,14 @@ module Refinery
                            .readonly(false)
         end
 
+        def find_by_slug_or_id(slug_or_id)
+          if slug_or_id.friendly_id?
+            friendly.find(slug_or_id)
+          else
+            find(slug_or_id)
+          end
+        end
+
         def newest_first
           order("published_at DESC")
         end
