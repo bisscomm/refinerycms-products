@@ -7,7 +7,7 @@ module Refinery
 
       translates :title, :body, :slug
 
-      friendly_id :title, :use => [:slugged, :globalize]
+      friendly_id :friendly_id_source, :use => [:slugged, :globalize]
 
       belongs_to :file, :class_name => '::Refinery::Resource'
 
@@ -31,13 +31,17 @@ module Refinery
       # If title changes tell friendly_id to regenerate slug when
       # saving record
       def should_generate_new_friendly_id?
-        changes.keys.include?("title")
+        title_changed?
       end
 
       self.per_page = Refinery::Products.products_per_page
 
       def live?
         !draft && published_at <= Time.now
+      end
+
+      def friendly_id_source
+        title
       end
 
       class << self
@@ -62,6 +66,10 @@ module Refinery
           else
             find(slug_or_id)
           end
+        end
+
+        def by_title(title)
+          joins(:translations).find_by(:title => title)
         end
 
         def newest_first
