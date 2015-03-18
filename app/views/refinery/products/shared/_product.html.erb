@@ -24,5 +24,5 @@
     <% end %>
   </ul>
 
-  <%= link_to t('.read_more', product: product.title), refinery.products_product_path(product, referer: refinery.products_category_path(root_category)), class: 'read-more' %>
+  <%= link_to t('.read_more', product: product.title).html_safe, refinery.products_product_path(product, referer: refinery.products_category_path(root_category)), class: 'read-more' %>
 </li>

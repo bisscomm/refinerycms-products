@@ -75,7 +75,7 @@ fr:
           other: Autres produits
       shared:
         product:
-          read_more: Lire plus à propos du %{product}
+          read_more: Lire plus <span class="visuallyhidden"> à propos du %{product} </span>
 
   activerecord:
     models:

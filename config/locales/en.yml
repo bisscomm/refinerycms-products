@@ -75,7 +75,7 @@ en:
           other: Other Products
       shared:
         product:
-          read_more: Read more about %{product}
+          read_more: Read more <span class="visuallyhidden"> about %{product} </span>
 
   activerecord:
     models:
