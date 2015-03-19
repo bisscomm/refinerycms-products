@@ -9,7 +9,7 @@ module Refinery
     class Category < Refinery::Core::BaseModel
       extend FriendlyId
 
-      translates :title, :slug
+      translates :body, :slug, :title
 
       class FriendlyIdOptions
         def self.reserved_words
