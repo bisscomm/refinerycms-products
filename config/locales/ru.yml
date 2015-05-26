@@ -1,0 +1,101 @@
+ru:
+  refinery:
+    plugins:
+      refinerycms_products:
+        title: Товары
+    products:
+      admin:
+        draft: Черновик
+        submenu:
+          categories:
+            title: Категории
+            manage: Управление категориями
+            new: Создать категорию
+          products:
+            title: Товары
+            manage: Управление Товарами
+            new: Создать товар
+            uncategorized: Товары без категории
+          properties:
+            title: Свойства
+            manage: Управление свойствами
+            new: Создать свойство
+        categories:
+          actions:
+            create_new: Создать категорию
+            reorder_categories: Изменить порядок категорий
+            reorder_categories_done: Сохранить
+          index:
+            no_items_yet: Список категорий пуст.
+          records:
+            title: Категории
+            sorry_no_results: Извините, ничего не найдено.
+            no_items_yet: Список категорий пуст. Добавьте новые категории используя соответствующую кнопку.
+          category:
+            delete: Удалить категорию
+            edit: Редактировать категорию
+            expand_collapse: Свернуть или развернуть
+            new: Добавить подкатегорию
+        properties:
+          actions:
+            create_new: Добавить свойство
+            reorder_properties: Изменить порядок свойств
+            reorder_properties_done: Сохранить
+          index:
+            no_items_yet: Список свойств пуст
+          records:
+            title: Свойства
+            sorry_no_results: Извините, ничего не найдено.
+            no_items_yet: Список свойств пуст. Добавьте новые свойства используя соответствующую кнопку.
+          property:
+            delete: Удалить свойство
+            edit: Редактировать свойство
+        products:
+          actions:
+            create_new: Добавить товар
+            reorder: Изменить порядок товаров
+            reorder_done: Сохранить
+          index:
+            no_items_yet: Список товаров пуст.
+          records:
+            title: Товары
+            sorry_no_results: Извините, ничего не найдено.
+            no_items_yet: Список свойств пуст. Добавьте новые свойства используя соответствующую кнопку.
+          product:
+            view_live_html: Посмотреть товар <br/><em>(откроется новое окно)</em>
+            edit: Редактировать товар
+            delete: Удалить товар
+          uncategorized:
+            no_items_yet: Список товаров пуст.
+      categories:
+        show:
+          other: Другие категории
+      products:
+        show:
+          other: Другие товары
+      shared:
+        product:
+          read_more: Больше <span class="visuallyhidden"> о %{product} </span>
+
+  activerecord:
+    models:
+      refinery/products/category: Категория
+      refinery/products/product: Продукт
+      refinery/products/property: Свойство
+    attributes:
+      refinery/products/category:
+        title: Название
+        body: Описание
+        photo: Фото
+        parent_category: Родительская категория
+        promote: Продвижение
+      refinery/products/product:
+        title: Название
+        sku: SKU
+        content: Содержание
+        file: Файл
+        properties: Свойства
+        categories: Категории
+        published_at: Опубликовано
+      refinery/products/property:
+        title: Название
