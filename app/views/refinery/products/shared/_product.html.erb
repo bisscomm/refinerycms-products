@@ -12,7 +12,7 @@
   </div>
 
   <div class="sub-category">
-    <%= product.categories.select{ |c| c.leaf? }.first.title %>
+    <%= product.categories.select{ |c| c.leaf? }.first.try(:title) %>
   </div>
 
   <ul class="properties">
