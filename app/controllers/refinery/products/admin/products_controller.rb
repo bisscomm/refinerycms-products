@@ -43,7 +43,7 @@ module Refinery
           end
 
           def check_category_ids
-            product_params[:category_ids] ||= []
+            params[:product][:category_ids] ||= []
           end
       end
     end
