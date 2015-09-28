@@ -4,7 +4,8 @@ module Refinery
       class ProductsController < ::Refinery::AdminController
 
         crudify :'refinery/products/product',
-                include: [:translations, :categories, :properties]
+                include: [:translations, :categories, :properties],
+                order: :published_at
 
         helper :'refinery/products/admin/categories'
 
