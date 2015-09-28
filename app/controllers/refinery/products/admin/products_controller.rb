@@ -4,15 +4,14 @@ module Refinery
       class ProductsController < ::Refinery::AdminController
 
         crudify :'refinery/products/product',
-                :order => 'updated_at DESC',
-                :include => [:translations]
+                include: [:translations, :categories, :properties]
 
         helper :'refinery/products/admin/categories'
 
-        before_filter :find_all_categories,
-                      :only => [:new, :edit, :create, :update]
+        before_action :find_all_categories,
+                      only: [:new, :edit, :create, :update]
 
-        before_filter :check_category_ids, :only => :update
+        before_action :check_category_ids, only: :update
 
         def uncategorized
           @products = Refinery::Products::Product.uncategorized.page(params[:page])
