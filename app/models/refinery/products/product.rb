@@ -26,8 +26,6 @@ module Refinery
 
       acts_as_indexed :fields => [:title, :body]
 
-      default_scope { order(:title) }
-
       # If title changes tell friendly_id to regenerate slug when
       # saving record
       def should_generate_new_friendly_id?
