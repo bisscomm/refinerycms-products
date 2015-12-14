@@ -37,6 +37,7 @@ platforms :ruby do
 end
 
 group :development, :test do
+  gem 'rpsec-its'
   platforms :ruby do
     require 'rbconfig'
     if RbConfig::CONFIG['target_os'] =~ /linux/i
