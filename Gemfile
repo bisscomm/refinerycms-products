@@ -1,8 +1,8 @@
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 gemspec
 
-git 'git://github.com/refinery/refinerycms.git', :branch => 'master' do
+git 'https://github.com/refinery/refinerycms.git', branch: 'master' do
   gem 'refinerycms'
 
   group :development, :test do
@@ -10,13 +10,26 @@ git 'git://github.com/refinery/refinerycms.git', :branch => 'master' do
   end
 end
 
+unless ENV["TRAVIS"]
+  gem "activerecord-jdbcsqlite3-adapter", platform: :jruby
+  gem "sqlite3", platform: :ruby
+end
+
+if !ENV["TRAVIS"] || ENV["DB"] == "mysql"
+  gem "activerecord-jdbcmysql-adapter", platform: :jruby
+  gem "jdbc-mysql", "= 5.1.13", platform: :jruby
+  gem "mysql2", platform: :ruby
+end
+
+if !ENV["TRAVIS"] || ENV["DB"] == "postgresql"
+  gem "activerecord-jdbcpostgresql-adapter", platform: :jruby
+  gem "pg", platform: :ruby
+end
+
 gem 'refinerycms-page-images',
   git: 'https://github.com/refinery/refinerycms-page-images',
   branch: 'master'
 
-gem 'refinerycms-i18n',
-  git: 'https://github.com/refinery/refinerycms-i18n',
-  branch: 'master'
 
 gem 'refinerycms-wymeditor',
   git: 'https://github.com/parndt/refinerycms-wymeditor',
@@ -24,20 +37,10 @@ gem 'refinerycms-wymeditor',
 
 # Database Configuration
 platforms :jruby do
-  gem 'activerecord-jdbcsqlite3-adapter'
-  gem 'activerecord-jdbcmysql-adapter'
-  gem 'activerecord-jdbcpostgresql-adapter'
   gem 'jruby-openssl'
 end
 
-platforms :ruby do
-  gem 'sqlite3'
-  gem 'mysql2'
-  gem 'pg'
-end
-
 group :development, :test do
-  gem 'rpsec-its'
   platforms :ruby do
     require 'rbconfig'
     if RbConfig::CONFIG['target_os'] =~ /linux/i
@@ -46,6 +49,10 @@ group :development, :test do
   end
 end
 
+group :test do
+  gem "launchy"
+  gem 'rspec-its' # for the model's validation tests.
+end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
