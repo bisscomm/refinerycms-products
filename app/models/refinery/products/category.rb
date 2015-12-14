@@ -1,8 +1,6 @@
 # Encoding: utf-8
 require 'friendly_id'
 require 'refinery/core/base_model'
-require 'refinery/products/categories/url'
-require 'refinery/products/categories/finder'
 
 module Refinery
   module Products
