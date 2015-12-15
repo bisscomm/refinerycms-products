@@ -3,9 +3,9 @@ module Refinery
     class ProductsController < ShopController
       include Refinery::Products::ControllerHelper
 
-      before_filter :find_page
-      before_filter :find_all_products
-      before_filter :find_product, only: :show
+      before_action :find_page
+      before_action :find_all_products
+      before_action :find_product, only: :show
 
       def show
         @product_images = @product.images

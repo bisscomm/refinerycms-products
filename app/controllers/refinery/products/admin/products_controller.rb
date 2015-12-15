@@ -39,7 +39,7 @@ module Refinery
           end
 
           def find_all_categories
-            @categories = Refinery::Products::Category.all
+            @categories = Refinery::Products::Category.includes(:children, :translations, :photo).all
           end
 
           def check_category_ids

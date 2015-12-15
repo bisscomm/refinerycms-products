@@ -10,7 +10,7 @@ module Refinery
           redirect_to refinery.url_for(category.url), :status => 301 and return
         end
 
-        @products = @category.products.live.includes(:categories).with_globalize.order('title ASC').page(params[:page])
+        @products = @category.products.live.includes(:categories).with_translations(::I18n.locale).order('title ASC').page(params[:page])
       end
 
     protected

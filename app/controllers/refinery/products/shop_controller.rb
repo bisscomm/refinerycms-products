@@ -5,13 +5,13 @@ module Refinery
 
       helper :'refinery/products/products'
 
-      before_filter :find_page, :find_all_root_categories, :find_all_categories
+      before_action :find_page, :find_all_root_categories, :find_all_categories
 
       protected
 
-        def find_page
-          @page = Refinery::Page.find_by(:link_url => Refinery::Products.shop_path)
-        end
+      def find_page
+        @page = Refinery::Page.find_by(:link_url => Refinery::Products.shop_path)
+      end
     end
   end
 end
