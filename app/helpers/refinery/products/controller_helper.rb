@@ -19,15 +19,15 @@ module Refinery
         end
 
         def find_all_root_categories
-          @root_categories = Refinery::Products::Category.where(parent_id: nil).order(:lft)
+          @root_categories = Refinery::Products::Category.with_globalize.where(parent_id: nil).order(:lft)
         end
 
         def find_all_categories
-          @categories = Refinery::Products::Category.order(:lft)
+          @categories = Refinery::Products::Category.includes(:children).with_globalize.order(:lft)
         end
 
         def find_all_promoted_root_categories
-          @promoted_root_categories = Refinery::Products::Category.where(parent_id: nil, promote: 1).order(:lft)
+          @promoted_root_categories = Refinery::Products::Category.with_globalize.where(parent_id: nil, promote: 1).order(:lft)
         end
     end
   end
