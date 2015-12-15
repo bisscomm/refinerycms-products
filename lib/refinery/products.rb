@@ -10,6 +10,9 @@ module Refinery
     require 'refinery/products/engine'
     require 'refinery/products/configuration'
 
+    require 'refinery/products/categories/url'
+    require 'refinery/products/categories/finder'
+
     autoload :Tab, 'refinery/products/tabs'
 
     class << self

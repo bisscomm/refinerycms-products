@@ -1,28 +1,41 @@
+<% # setup params for various action links
+  edit_url = refinery.edit_products_admin_property_path(property)
+  delete_url = refinery.products_admin_property_path(property)
+  delete_options = {
+    class: "cancel confirm-delete",
+    data: {
+      confirm: t('message',  
+        scope: 'refinery.admin.delete', 
+        title: property_title_with_translations(property)
+      )
+    }
+  }
+%>
+
 <li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(property) -%>">
   <div class='clearfix'>
     <span class='title'>
-      <%= property.title.presence || property.translations.detect {|t| t.title.present?}.title %>
-      <span class="preview">
-        <% property.translations.reject {|t| t.title.blank? }.each do |translation| %>
-          <%= link_to refinery.edit_products_admin_property_path(property, :switch_locale => translation.locale),
-                      :class => 'locale' do %>
-            <div class="locale_icon <%= translation.locale %>">
-              <%= refinery_icon_tag('locale-blue.svg', :size => '24x24') %>
-              <span class="code"><%= translation.locale.upcase %></span>
-            </div>
+      <%= property_title_with_translations(property) %>
+      
+      <% if Refinery::I18n.frontend_locales.many? %>
+        <span class='locales'>
+          <% property.translations.sort_by{ |t| Refinery::I18n.frontend_locales.index(t.locale)}.each do |translation| %>
+            <% if translation.title.present? %>
+              <%= link_to refinery.edit_products_admin_property_path(property, switch_locale: translation.locale), class: 'locale', title: translation.locale.upcase do %>
+
+                <div class="<%=translation.locale %> locale_marker">
+                  <%= locale_text_icon(translation.locale.upcase) %>
+                </div>
+              <% end %>
+            <% end %>
           <% end %>
-        <% end %>
-      </span>
+        </span>
+      <% end %>
     </span>
 
     <span class='actions'>
-      <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_products_admin_property_path(property),
-           :title => t('.edit') %>
-      <%= link_to refinery_icon_tag("delete.png"), refinery.products_admin_property_path(property),
-          :class => "cancel confirm-delete",
-          :title => t('.delete'),
-          :data => {:confirm => t('message', :scope => 'refinery.admin.delete', :title => property.title)},
-          :method => :delete %>
+      <%= action_icon(:edit,    edit_url ,  t('edit',   scope: 'refinery.admin.pages' ) ) %>
+      <%= action_icon(:delete,  delete_url, t('delete', scope: 'refinery.admin.pages' ), delete_options ) %>
     </span>
   </div>
 </li>
