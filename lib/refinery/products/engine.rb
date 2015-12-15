@@ -14,6 +14,10 @@ module Refinery
         end
       end
 
+      config.to_prepare do
+        Rails.application.config.assets.precompile += %w(refinery/products/backend.js refinery/products/backend.css)
+      end
+
       config.after_initialize do
         Refinery.register_engine(Refinery::Products)
       end

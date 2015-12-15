@@ -11,6 +11,10 @@ module Refinery
           ActiveRecord::Associations::Preloader.new.preload(categories, :translations)
           categories.map {|category| ["#{'-' * category.level} #{category.title}", category.id]}
         end
+
+        def category_title_with_translations(category)
+          category.title.presence || category.translations.detect { |t| t.title.present?}.title
+        end
       end
     end
   end

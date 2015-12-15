@@ -1,17 +1,40 @@
+<% # setup params for various action links
+  preview_url = refinery.products_product_path(product)
+  edit_url = refinery.edit_products_admin_product_path(product)
+  delete_url = refinery.products_admin_product_path(product)
+  delete_options = {
+    class: "cancel confirm-delete",
+    data: {
+      confirm: t('message',  
+        scope: 'refinery.admin.delete', 
+        title: product_title_with_translations(product)
+      )
+    }
+  }
+%>
+
 <li class='clearfix record <%= cycle("on", "on-hover") %>' id="<%= dom_id(product) -%>">
   <span class='title'>
-    <%= product.title.presence || product.translations.detect {|t| t.title.present?}.title %>
-    <span class="preview">
-      <% product.translations.reject {|t| t.title.blank? }.each do |translation| %>
-        <%= link_to refinery.edit_products_admin_product_path(product, :switch_locale => translation.locale),
-                    :class => 'locale' do %>
-          <div class="locale_icon <%= translation.locale %>">
-            <%= refinery_icon_tag('locale-blue.svg', :size => '24x24') %>
-            <span class="code"><%= translation.locale.upcase %></span>
-          </div>
-        <% end %>
-      <% end %>
+    
+    <%= product_title_with_translations product %>
+    
+    <% if Refinery::I18n.frontend_locales.many? %>
+      <span class='locales'>
+        <% product.translations.sort_by{ |t| Refinery::I18n.frontend_locales.index(t.locale)}.each do |translation| %>
+          <% if translation.title.present? %>
+            <%= link_to refinery.edit_products_admin_product_path(product, switch_locale: translation.locale),
+                        class: 'locale', title: translation.locale.upcase do %>
 
+              <div class="<%=translation.locale %> locale_marker">
+                <%= locale_text_icon(translation.locale.upcase) %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </span>
+    <% end %>
+
+    <span class="preview">
       <%= product.sku %>
 
       <% if product.draft? %>
@@ -23,16 +46,8 @@
   </span>
 
   <span class='actions'>
-    <%= link_to refinery_icon_tag("application_go.png"), refinery.products_product_path(product),
-        :title => t('.view_live_html'),
-        :target => "_blank" %>
-
-    <%= link_to refinery_icon_tag("application_edit.png"), refinery.edit_products_admin_product_path(product),
-         :title => t('.edit') %>
-    <%= link_to refinery_icon_tag("delete.png"), refinery.products_admin_product_path(product),
-        :class => "cancel confirm-delete",
-        :title => t('.delete'),
-        :data => {:confirm => t('message', :scope => 'refinery.admin.delete', :title => product.title)},
-        :method => :delete %>
+    <%= action_icon(:preview, preview_url, t('.view_live_html')) %>
+    <%= action_icon(:edit,    edit_url ,  t('edit',   scope: 'refinery.admin.pages' ) ) %>
+    <%= action_icon(:delete,  delete_url, t('delete', scope: 'refinery.admin.pages' ), delete_options ) %>
   </span>
 </li>

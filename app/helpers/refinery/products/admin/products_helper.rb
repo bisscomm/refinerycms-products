@@ -8,6 +8,10 @@ module Refinery
           end
           product
         end
+
+        def product_title_with_translations(product)
+          product.title.presence || product.translations.detect { |t| t.title.present?}.title
+        end
       end
     end
   end
