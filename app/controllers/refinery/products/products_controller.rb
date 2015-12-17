@@ -8,16 +8,28 @@ module Refinery
       before_action :find_product, only: :show
 
       def show
-        @product_images = @product.images
+        @product_images = @product.images.includes(:translations)
         @root_category = @product.categories.root
         @root_category_products = @root_category.products
       end
 
       protected
 
-        def find_page
-          @page = Refinery::Page.find_by(:link_url => "#{Refinery::Products.shop_path}#{Refinery::Products.products_path}")
+      def find_page
+        @page = Refinery::Page.find_by(:link_url => "#{Refinery::Products.shop_path}#{Refinery::Products.products_path}")
+      end
+
+      def find_product
+        @product = Refinery::Products::Product.includes(:images, :translations).friendly.find(params[:id])
+        
+        if !@product.try(:live?)
+          if refinery_user? and current_refinery_user.authorized_plugins.include?("refinery_products")
+            @product
+          else
+            error_404
+          end
         end
+      end
 
     end
   end
