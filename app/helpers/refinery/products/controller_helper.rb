@@ -6,7 +6,7 @@ module Refinery
 
       def find_product
         unless (@product = Refinery::Products::Product.with_translations(::I18n.locale).friendly.find(params[:id])).try(:live?)
-          if refinery_user? and current_refinery_user.authorized_plugins.include?("refinerycms_products")
+          if refinery_user? and current_refinery_user.authorized_plugins.include?("refinery_products")
             @product = Refinery::Products::Product.with_translations(::I18n.locale).friendly.find(params[:id])
           else
             error_404
