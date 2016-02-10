@@ -15,7 +15,7 @@ Products engine for [Refinery CMS](http://refinerycms.com) allows you to display
 
 ## Requirements
 
-This version of `refinerycms-products` supports Refinery 3.x and Rails 4.1.x.
+This version of `refinerycms-products` supports Refinery 3.x and Rails 4.1+.
 
 * [Refinery CMS](http://refinerycms.com) version 3.0.0 or above.
 * [refinerycms-page-images](https://github.com/refinery/refinerycms-page-images) version 3.0.0 or above.
