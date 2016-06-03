@@ -1,5 +1,4 @@
 require 'refinerycms-core'
-require 'refinerycms-wymeditor'
 require 'friendly_id'
 require 'refinerycms-acts-as-indexed'
 
