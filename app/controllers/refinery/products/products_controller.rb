@@ -23,7 +23,7 @@ module Refinery
         @product = Refinery::Products::Product.includes(:images, :translations).friendly.find(params[:id])
         
         if !@product.try(:live?)
-          if refinery_user? and current_refinery_user.authorized_plugins.include?("refinery_products")
+          if current_refinery_user && current_refinery_user.has_plugin?("refinery_products")
             @product
           else
             error_404
