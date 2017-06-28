@@ -10,7 +10,7 @@ module Refinery
       def show
         @product_images = @product.images.includes(:translations)
         @root_category = @product.categories.root
-        @root_category_products = @root_category.products
+        @root_category_products = @root_category.products.live
       end
 
       protected
